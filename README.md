@@ -14,6 +14,8 @@ The workshop starts with an opportunity to quickly introduce yourself, followed 
 
 ## Introduction
 
+- [] create menti quiz
+
 To help get a sense of your interests, and your experience (if any) with BHL, we have a short Menti quiz where you can tell us a little about yourself (anonymously). There are three questions:
 - what is your background? (taxonomist, developer, data scientist, )
 - how often do you use BHL? (daily, weekly, monthly, infrequently, never)
@@ -28,6 +30,9 @@ The website [BHL on a Hilbert curve](https://iphylo.org/bhl-all-the-pages/) is a
 If you are taking part in this workshop it is likely that you have some experience with BHL, never the less it is probably worth listing some of the ways to access BHL.
 
 ### Ways to access BHL
+
+- [] choose link to show
+- [] chose search terms to demo
 
 - BHL displays scanned content using a scrollable viewer ** make a link **
 - you can search BHL by taxonomic name or any text term ** make a link **
@@ -81,11 +86,11 @@ to do
 
 ### Taxonomic timelines
 
-Viewing changes in word usage overtime was popularised by the [Google Books Ngram Viewer](https://books.google.com/ngrams/) tool. Ryan Schenk's synynyms tool (now offline, see [Taxonomic name timelines for BHL](https://iphylo.blogspot.com/2016/12/taxonomic-name-timelines-for-bhl.html), Ryna's code is in [GitHub](https://github.com/rschenk/synynyms)) was an early example of a similar approach to taxonomic names. 
+Viewing changes in word usage overtime was popularised by the [Google Books Ngram Viewer](https://books.google.com/ngrams/) tool. Ryan Schenk's synynyms tool (now offline, see [Taxonomic name timelines for BHL](https://iphylo.blogspot.com/2016/12/taxonomic-name-timelines-for-bhl.html), Ryan’s code is in [GitHub](https://github.com/rschenk/synynyms)) was an early example of a similar approach to taxonomic names. 
 
-In this workshop we will use a simple tool that traces the occurrences of a taxonomic name in BHL over time. In contrast to BHL itself, the [BHL Name Timeline](http://localhost/bhl-name-timeline/) attempts to aggregate occurrences of names by BHL item or part (in other words, if a name occurs in several pages that are part of the same article, BHL Name Timeline lists those occurrences just once).
+In this workshop we will use a simple tool that traces the occurrences of a taxonomic name in BHL over time. In contrast to BHL itself, the [BHL Name Timeline](https://iphylo.org/bhl-name-timeline/) attempts to aggregate occurrences of names by BHL item or part (in other words, if a name occurs in several pages that are part of the same article, BHL Name Timeline lists those occurrences just once).
 
-You can ask the tool to fetch synonymns for a taxonomic name from the [Catalogue of Life ](https://www.catalogueoflife.org), or you can list two or more names separated by comma. For example, you can compare usages of two alternative names for the [sperm whale](https://en.wikipedia.org/wiki/Sperm_whale), _Physeter catodon_ and _Physeter macrocephalus_
+You can ask the tool to fetch synonymns for a taxonomic name from the [Catalogue of Life](https://www.catalogueoflife.org), or you can list two or more names separated by comma. For example, you can compare usages of two alternative names for the [sperm whale](https://en.wikipedia.org/wiki/Sperm_whale), _Physeter catodon_ and _Physeter macrocephalus_
 
 ![timeline](timeline.png)
 
@@ -169,19 +174,35 @@ BioStor comprises the largest source of articles in BHL, and also serves as an e
 
 [Allmaps](https://allmaps.org) is a fascinating project where people can add an image of a map to a modern map. The software will handle things such as align the map to latitude and longitude points, rotate and stretch the map image as required. In  order to work Allmaps needs the map image to be available in the [IIIF](https://iiif.io) format.
 
+![allmaps_image](allmaps_image.png)
+
+1. Go to https://editor.allmaps.org/
+2. Paste in the IIIF manifest for a BHL item. You can get these from https://iphylo.org/bhl-light, for example https://iphylo.org/bhl-light/item/148293/manifest.json
+3. Pick an image with a map, for example “Image 8”. Double click to load it into the editor.
+4. Use the [polygon](polygon.png) tool to draw a rectangle or polygon around the map, once you have the polygon you like, double-click, and then click “Finish”. If the shape you have created isn’t what you want, click on the “Map” button on the bottom right to see a list of the polygons you have drawn and delete them.
+5. Click on the [pin](pin.png) pin tool to load a view of the map image and a map of the world.
+6. Find pairs of localities in the image and the map and click on both. If you make a mistake, click on the “Map” button and delete it.
+7. When you have the added all the pairs you want, click on the [map](map.png) map tool to see your image overlayed on the map. If the map looks horribly distorted you can also try various transformations, “Helmert” often looks good. 
+8. You can adjust the opacity of both the background map and the BHL image.
+![allmaps_opacity](allmaps_opacity.png)
+
 
 We have a short quiz:
 
 - what map-based interface works best for you?
 - are there any map interfaces you've seen that we've missed?
 
+### Knowledge graphs and BHL
+
+Wikidata? RDF?
 
 
 ## Summary
 
 At the end of the workshop we have another Menti quiz.
 - what feature we investigated would you most like to see in a future BHL?
-- what thing(s) did we miss?
+- was the workshop useful?
+- should BHL have a challenge like GBIF has?
 
 
 ## References
