@@ -179,7 +179,7 @@ BioStor comprises the largest source of articles in BHL, and also serves as an e
 1. Go to https://editor.allmaps.org/
 2. Paste in the IIIF manifest for a BHL item. You can get these from https://iphylo.org/bhl-light, for example https://iphylo.org/bhl-light/item/148293/manifest.json
 3. Pick an image with a map, for example “Image 8”. Double click to load it into the editor.
-4. Use the ![polygon](polygon.png | width=64) tool to draw a rectangle or polygon around the map, once you have the polygon you like, double-click, and then click “Finish”. If the shape you have created isn’t what you want, click on the “Map” button on the bottom right to see a list of the polygons you have drawn and delete them.
+4. Use the <img src="polygon.png" height="64"> tool to draw a rectangle or polygon around the map, once you have the polygon you like, double-click, and then click “Finish”. If the shape you have created isn’t what you want, click on the “Map” button on the bottom right to see a list of the polygons you have drawn and delete them.
 5. Click on the ![pin](pin.png) pin tool to load a view of the map image and a map of the world.
 6. Find pairs of localities in the image and the map and click on both. If you make a mistake, click on the “Map” button and delete it.
 7. When you have the added all the pairs you want, click on the ![map](map.png) map tool to see your image overlayed on the map. If the map looks horribly distorted you can also try various transformations, “Helmert” often looks good. 
