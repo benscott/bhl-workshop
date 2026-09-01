@@ -192,9 +192,15 @@ We have a short quiz:
 - what map-based interface works best for you?
 - are there any map interfaces you've seen that we've missed?
 
-### Knowledge graphs and BHL
+## BHL and AI
 
-Wikidata? RDF?
+In amongst all the buzz and noise about AI, one of the most interesting outcomes is the [Model Context Protocol](https://en.wikipedia.org/wiki/Model_Context_Protocol) which can act as an interface between natural langauge queries in a ChatBot (such as OpenAI or Claude) and a database (or other resource). 
+
+In this workshop we will explore using MCP to “talk” to BHL and ask questions about the what is in the digital library, as well as what it can tell us about specific taxa of interest.
+
+## BHL and knowledge graphs
+
+This section is left as an exercise for the reader (!). There is a lot of BHL-related content on Wikidata, and interesting developments around GBIF, OpenStreetMap, and RDF. 
 
 
 ## Summary
