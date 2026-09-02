@@ -14,9 +14,8 @@ The workshop starts with an opportunity to quickly introduce yourself, followed 
 
 ## Introduction
 
-- [] create menti quiz
-
 To help get a sense of your interests, and your experience (if any) with BHL, we have a short Menti quiz where you can tell us a little about yourself (anonymously). There are three questions:
+
 - what is your background? (taxonomist, developer, data scientist, )
 - how often do you use BHL? (daily, weekly, monthly, infrequently, never)
 - what do you like most about BHL?
@@ -31,11 +30,8 @@ If you are taking part in this workshop it is likely that you have some experien
 
 ### Ways to access BHL
 
-- [] choose link to show
-- [] chose search terms to demo
-
-- BHL displays scanned content using a scrollable viewer ** make a link **
-- you can search BHL by taxonomic name or any text term ** make a link **
+- BHL displays scanned content using a scrollable viewer, e.g. [Amphibian & reptile conservation v.9:no.1=no.16(2015)](https://www.biodiversitylibrary.org/item/199416)
+- you can search BHL by taxonomic name, such as [*Aerodramus*](https://www.biodiversitylibrary.org/name/Aerodramus) or by text, such as [holotype specimen](https://www.biodiversitylibrary.org/search?stype=F&searchTerm=holotype+specimen#/titles)
 - there are [data downloads and a well documented API](https://about.biodiversitylibrary.org/tools-and-services/developer-and-data-tools/)
 - you can access images and OCR text directly via [Amazon Web Services](https://registry.opendata.aws/bhl-open-data/)
 - many of the colour plates (the "pretty") from BHL are also on [Flickr](https://www.flickr.com/photos/biodivlibrary/with/53903344408)
@@ -69,20 +65,29 @@ The final viewer displays both the BHL page images, but also OCR text from [Data
 
 We have a short quiz:
 
-- how important is mobile to you?
+- how important is being able to see BHL on a small screen to you?
 - how important is a custom BHL viewer (versus, say, just providing PDFs?)
 - do you have any suggestions for ways to view BHL content?
 
 
 ## BHL search
 
+BHL has full text search, which in principle means you can search for any text you like. However it has some limitations, which you can see if you search for the following strings:
 
-to do
+- [Afrophyla gen nov](https://www.biodiversitylibrary.org/search?stype=F&searchTerm=Afrophyla+gen+nov#/titles)
 
+If you click on the “⊞ Details” link below a search result you will see the text that BHL matched on. The item with the best match is not top of the list of search results.
+
+- [Notes synonymiques sur divers Dasytides](https://www.biodiversitylibrary.org/search?stype=F&searchTerm=Notes+synonymiques+sur+divers+Dasytides#/titles)
+
+The top two hits do have this string, but [page 64720438](http://www.biodiversitylibrary.org/page/64720438) which also has this string does not appear on the first page of search results.
+
+Can you figure out what is going on?
 
 
 ## BHL name search
 
+Arguably BHL’s “killer feature” is taxonomic name indexing, provided by [Global Names](https://globalnames.org). Each page in BHL has been searched for strings that look like taxonomic names, and these have been indexed so that you can search by taxonomic name. Sometimes it finds strings that aren’t taxonomic names (or, might be taxonomic names, but in most cases aren’t). For example [Scutellum](https://www.biodiversitylibrary.org/name/Scutellum) or [Argentina](https://www.biodiversitylibrary.org/name/Argentina).
 
 ### Taxonomic timelines
 
@@ -90,12 +95,11 @@ Viewing changes in word usage overtime was popularised by the [Google Books Ngra
 
 In this workshop we will use a simple tool that traces the occurrences of a taxonomic name in BHL over time. In contrast to BHL itself, the [BHL Name Timeline](https://iphylo.org/bhl-name-timeline/) attempts to aggregate occurrences of names by BHL item or part (in other words, if a name occurs in several pages that are part of the same article, BHL Name Timeline lists those occurrences just once).
 
-You can ask the tool to fetch synonymns for a taxonomic name from the [Catalogue of Life](https://www.catalogueoflife.org), or you can list two or more names separated by comma. For example, you can compare usages of two alternative names for the [sperm whale](https://en.wikipedia.org/wiki/Sperm_whale), _Physeter catodon_ and _Physeter macrocephalus_
+You can ask the tool to fetch synonymns for a taxonomic name from the [Catalogue of Life](https://www.catalogueoflife.org), or you can list two or more names separated by comma. For example, you can compare usages of two alternative names for the [sperm whale](https://en.wikipedia.org/wiki/Sperm_whale), _Physeter catodon_ and _Physeter macrocephalus_ (for fun see the Wikipedia talk page on these two names [catodon](https://en.wikipedia.org/w/index.php?title=Talk:Sperm_whale/Archive_1&commentname=h-UtherSRG-2008-10-03T04%3A59%3A00.000Z&section=catodon#:~:text=We%20should%20follow%20MSW3%2C%20as%20it%20is%20what%20is%20used%20in%20nearly%20all%20other%20mammal%20articles%20on%20Wikipedia.)).
 
 ![timeline](timeline.png)
 
 ![synynyms](Bison-bison-Linnaeus-1758-synynyms-1024x675.png)
-
 
 
 ## BHL image search
@@ -117,7 +121,6 @@ and the tool will return the probability that the image belongs in each of those
 ![zeroshot](zeroshot.png)
 
 Tools like this image classifier could help BHL automate the tags it assigns to pages, perhaps enabling users to search for categories of pages (e.g., "show me pages that display maps").
-
 
 
 ### Image search
@@ -151,6 +154,7 @@ We have a short quiz:
 
 - is image search useful?
 - what could you do with it?
+- how important is it to search by individual images (e.g., figures, not pages)
 
 
 
@@ -172,7 +176,7 @@ BioStor comprises the largest source of articles in BHL, and also serves as an e
 
 ### Putting maps on the map (Allmaps)
 
-[Allmaps](https://allmaps.org) is a fascinating project where people can add an image of a map to a modern map. The software will handle things such as align the map to latitude and longitude points, rotate and stretch the map image as required. In  order to work Allmaps needs the map image to be available in the [IIIF](https://iiif.io) format.
+[Allmaps](https://allmaps.org) is a fascinating project where people can add an image of a map to a modern map. The software will handle things such as align the map to latitude and longitude points, and rotate and stretch the map image as required. In order to work Allmaps needs the map image to be available in the [IIIF](https://iiif.io) format.
 
 ![allmaps_image](allmaps_image.png)
 
@@ -205,7 +209,8 @@ This section is left as an exercise for the reader (!). There is a lot of BHL-re
 
 ## Summary
 
-At the end of the workshop we have another Menti quiz.
+At the end of the workshop we have another Menti quiz:
+
 - what feature we investigated would you most like to see in a future BHL?
 - was the workshop useful?
 - should BHL have a challenge like GBIF has?
