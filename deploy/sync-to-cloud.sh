@@ -8,8 +8,12 @@
 set -euo pipefail
 
 # --- config -----------------------------------------------------------------
-HETZNER_SSH="${HETZNER_SSH:-root@your-hetzner-host}"   # ssh target
-HETZNER_DIR="${HETZNER_DIR:-/opt/bhl-workshop}"         # repo dir on Hetzner
+# 'bhl-hetzner' is an ssh alias defined in ~/.ssh/config on the Mini (HostName,
+# User and the id_ed25519_hetzner IdentityFile live there, not here).
+HETZNER_SSH="${HETZNER_SSH:-bhl-hetzner}"                    # ssh target
+# NB: this is the deploy/ dir inside the cloned repo -- that is where
+# bootstrap.sh creates sites/, not the repo root.
+HETZNER_DIR="${HETZNER_DIR:-/opt/bhl-workshop/deploy}"       # deploy dir on Hetzner
 
 # Local CouchDB (on the Mini) and remote CouchDB (Hetzner), with creds.
 LOCAL_COUCH="${LOCAL_COUCH:-http://admin:PASS@127.0.0.1:5984}"
@@ -27,6 +31,7 @@ LOCAL_PAGES="${LOCAL_PAGES:-$HOME/Sites/iphylo/bhl-all-the-pages}"
 # rsync uses --partial/--inplace, so an interrupted run resumes.
 
 echo "== 1/3  rsync bhl.db (13 GB) -> Hetzner"
+ssh "$HETZNER_SSH" "mkdir -p $HETZNER_DIR/sites/bhl-name-timeline"
 rsync -avP --inplace --partial \
   "$LOCAL_SQLITE" \
   "$HETZNER_SSH:$HETZNER_DIR/sites/bhl-name-timeline/bhl.db"
