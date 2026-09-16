@@ -1,6 +1,6 @@
 # BHL Workshop
 
-![QR](Qq9gaHtO6xZxA54_Untitled 2026-09-16.jpeg)
+<img src="Qq9gaHtO6xZxA54_Untitled 2026-09-16.jpeg">
 
 ## Overview
 
