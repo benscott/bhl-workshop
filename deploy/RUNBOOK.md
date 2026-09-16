@@ -3,40 +3,57 @@
 Goal: Hetzner is the **primary** workshop server; the Mac mini is dev/backup.
 Data flows **Mini → Hetzner** (outbound push, works through home NAT).
 
-## 0. Provision the box
-**CX33 (4 vCPU / 8 GB RAM / 80 GB disk), Helsinki (hel1)** — closest region to Oslo.
+## 0. The box
 
-Measured payload (2026-09-16):
+Use the **existing CPX32** (4 vCPU x86_64 / 8 GB / 160 GB) — `ubuntu-8gb-hel1-1`
+at 89.167.34.51, Helsinki, which already runs the CLIP image-search API. No
+second server is needed. Verified on it 2026-09-16:
 
-| Item | Size |
-|------|------|
-| `bhl.db` (SQLite) | 13 GB |
-| CouchDB `bhl-lite` (52,768 docs) | 6.1 GB |
-| `bhl-all-the-pages` `tiles/` + `cache/` | 4.3 GB |
-| site code | ~3 MB |
-| **total data** | **~23.4 GB** |
+| Need | Available | |
+|------|-----------|---|
+| ~35 GB disk | 133 GB free (150 GB, 8% used) | ok |
+| >=5 GB RAM for the stack | 5.9 GB available | ok |
+| ports 8080 + 5984 | only 8000 in use (uvicorn) | ok |
 
-Plus OS + Docker (~4 GB), images (~1 GB), and ~6 GB transient headroom for
-CouchDB compaction (it rewrites the whole `.couch` file). That's a ~35 GB floor,
-so the 40 GB tier (CX23/CAX11) is too tight — take the 80 GB tier rather than
-adding a volume. The 8 GB RAM matters mostly as OS page cache for the 13 GB
-SQLite; CouchDB itself is fine in ~2 GB at this doc count.
+Why ~35 GB: the measured payload is ~23.4 GB (`bhl.db` 13 GB, CouchDB `bhl-lite`
+6.1 GB over 52,768 docs, `bhl-all-the-pages` tiles+cache 4.3 GB), plus OS,
+images, and ~6 GB transient headroom for CouchDB compaction, which rewrites the
+whole `.couch` file. RAM matters mainly as page cache for the 13 GB SQLite.
 
-CAX21 (Arm, same 4/8/80) also works — both `php:8.3-apache` and `couchdb:3.4`
-ship arm64 images — but x86 is the safer bet for a box you can't debug live.
-- Install Docker + docker compose, `git`, and (optionally) `git-lfs`.
-  Open ports 80/443; restrict 5984 to the Mini's IP (or only expose CouchDB
-  via the TLS proxy).
-- Clone this repo and work in `deploy/`:
-  ```
-  git clone https://github.com/rdmpage/bhl-workshop.git /opt/bhl-workshop
-  cd /opt/bhl-workshop/deploy
-  ```
-
-## 1. Configure
+### Prerequisites to install (Ubuntu 26.04)
 ```
+apt-get update
+apt-get install -y docker.io docker-compose-v2 git-lfs && git lfs install
+```
+`git` is already present. Without git-lfs, `bhl-light/tagging/uber_h3.db` clones
+as a pointer — harmless, but bootstrap.sh will say so.
+
+### Add swap first
+The box has **no swap**, and we are adding CouchDB + Apache/PHP alongside a live
+API (uvicorn, ~1.1 GB RSS). With no swap a memory spike means the OOM killer
+picks a victim, possibly the search API, mid-workshop:
+```
+fallocate -l 4G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile
+echo '/swapfile none swap sw 0 0' >> /etc/fstab
+```
+
+### Note on co-location
+`bhl-image-search` already depends on this box, so hosting the other three here
+means one failure takes out all four demos. That is still far better than the
+Mini, but it is a real concentration of risk. Bonus: `BHL_SEARCH_API` can become
+a local call, so `:8000` need not stay exposed.
+
+Firewall: open 80/443. Restrict 5984 to the Mini's IP, or only expose CouchDB
+via the TLS proxy.
+
+## 1. Clone and configure (on Hetzner)
+```
+git clone https://github.com/rdmpage/bhl-workshop.git /opt/bhl-workshop
+cd /opt/bhl-workshop/deploy
 cp .env.template .env && $EDITOR .env      # fill in secrets
 ```
+`sync-to-cloud.sh` writes to `/opt/bhl-workshop/deploy/sites/`, so use exactly
+this path or override `HETZNER_DIR` when running it.
 
 ## 2. Bring the stack up (on Hetzner)
 ```
