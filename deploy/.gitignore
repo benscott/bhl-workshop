@@ -10,5 +10,7 @@ sites/
 *.db-shm
 *.db-wal
 couch-data/
+caddy-data/
+caddy-config/
 
 .DS_Store

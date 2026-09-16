@@ -1,0 +1,20 @@
+# Caddy terminates TLS for the workshop hostname and proxies to the PHP
+# container. It obtains and renews a Let's Encrypt certificate automatically,
+# and redirects http:// to https:// on its own.
+#
+# This requires bhl-workshop.iphylo.org to resolve DIRECTLY to this box
+# (Cloudflare grey cloud / "DNS only"). If the record is proxied (orange cloud),
+# Let's Encrypt's HTTP-01 challenge is answered by Cloudflare rather than by
+# Caddy and issuance fails.
+bhl-workshop.iphylo.org {
+	reverse_proxy web:80
+
+	encode zstd gzip
+
+	log {
+		output file /data/access.log {
+			roll_size 10MiB
+			roll_keep 5
+		}
+	}
+}
