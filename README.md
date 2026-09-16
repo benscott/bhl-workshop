@@ -1,7 +1,6 @@
 # BHL Workshop
 
-![bhlviewer](Qq9gaHtO6xZxA54_Untitled 2026-09-16.png)
-
+![QR](Qq9gaHtO6xZxA54_Untitled 2026-09-16.jpeg)
 
 ## Overview
 
