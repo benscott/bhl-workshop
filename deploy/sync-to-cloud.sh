@@ -17,7 +17,12 @@ HETZNER_DIR="${HETZNER_DIR:-/opt/bhl-workshop/deploy}"       # deploy dir on Het
 
 # Local CouchDB (on the Mini) and remote CouchDB (Hetzner), with creds.
 LOCAL_COUCH="${LOCAL_COUCH:-http://admin:PASS@127.0.0.1:5984}"
-REMOTE_COUCH="${REMOTE_COUCH:-https://admin:PASS@couch.your-hetzner-host}"
+# Through Caddy on 443, NOT port 5984 -- CouchDB is no longer published to the
+# host. Keep the credentials IN THE URL: that lets the replicator authenticate
+# once via /_session and reuse the cookie. Passing an Authorization header
+# instead makes CouchDB bcrypt-verify the password on every single request,
+# which measured ~4x slower.
+REMOTE_COUCH="${REMOTE_COUCH:-https://admin:PASS@bhl-workshop.iphylo.org/_couch}"
 
 # Local SQLite to push (bhl-name-timeline).
 LOCAL_SQLITE="${LOCAL_SQLITE:-$HOME/Sites/iphylo/bhl-name-timeline/bhl.db}"
@@ -67,6 +72,15 @@ for db in _users _replicator _global_changes; do
 done
 
 # A persistent doc in _replicator survives restarts and keeps the copy live.
+#
+# The tuning matters more than it looks. Glasgow->Helsinki is a ~58ms round
+# trip, and CouchDB replication is latency-bound rather than bandwidth-bound, so
+# the default 4 workers left it at 167 kB/s while rsync was managing 4.4 MB/s
+# over the same link. 16 workers took it to ~750 kB/s.
+#
+# NB: after (re)creating this doc the rate looks terrible for the first minute
+# while the replicator rescans and skips docs already present. Measure after it
+# settles, not immediately.
 rep_body=$(mktemp)
 rep_code=$(curl -s -o "$rep_body" -w '%{http_code}' -X PUT \
   "$LOCAL_COUCH/_replicator/bhl-lite-to-cloud" \
@@ -76,7 +90,11 @@ rep_code=$(curl -s -o "$rep_body" -w '%{http_code}' -X PUT \
         \"source\": \"$LOCAL_COUCH/bhl-lite\",
         \"target\": \"$REMOTE_COUCH/bhl-lite\",
         \"create_target\": true,
-        \"continuous\": true
+        \"continuous\": true,
+        \"worker_processes\": 16,
+        \"http_connections\": 40,
+        \"worker_batch_size\": 200,
+        \"connection_timeout\": 60000
       }")
 
 case "$rep_code" in
