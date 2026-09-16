@@ -4,7 +4,26 @@ Goal: Hetzner is the **primary** workshop server; the Mac mini is dev/backup.
 Data flows **Mini → Hetzner** (outbound push, works through home NAT).
 
 ## 0. Provision the box
-- Hetzner CX22/CPX11 + a ~40 GB volume (code + `bhl.db` ~14 GB + CouchDB ~6 GB).
+**CX33 (4 vCPU / 8 GB RAM / 80 GB disk), Helsinki (hel1)** — closest region to Oslo.
+
+Measured payload (2026-09-16):
+
+| Item | Size |
+|------|------|
+| `bhl.db` (SQLite) | 13 GB |
+| CouchDB `bhl-lite` (52,768 docs) | 6.1 GB |
+| `bhl-all-the-pages` `tiles/` + `cache/` | 4.3 GB |
+| site code | ~3 MB |
+| **total data** | **~23.4 GB** |
+
+Plus OS + Docker (~4 GB), images (~1 GB), and ~6 GB transient headroom for
+CouchDB compaction (it rewrites the whole `.couch` file). That's a ~35 GB floor,
+so the 40 GB tier (CX23/CAX11) is too tight — take the 80 GB tier rather than
+adding a volume. The 8 GB RAM matters mostly as OS page cache for the 13 GB
+SQLite; CouchDB itself is fine in ~2 GB at this doc count.
+
+CAX21 (Arm, same 4/8/80) also works — both `php:8.3-apache` and `couchdb:3.4`
+ship arm64 images — but x86 is the safer bet for a box you can't debug live.
 - Install Docker + docker compose, `git`, and (optionally) `git-lfs`.
   Open ports 80/443; restrict 5984 to the Mini's IP (or only expose CouchDB
   via the TLS proxy).
@@ -29,8 +48,12 @@ Sites now serve on `:8080/bhl-light/`, `:8080/bhl-image-search/`, etc.
 ```
 ./sync-to-cloud.sh        # edit the HETZNER_* / COUCH vars first
 ```
-- rsyncs `bhl.db` up (~14 GB — do this well before the workshop).
+- rsyncs `bhl.db` up (13 GB, resumable via `--partial --inplace`).
+- tar-streams `bhl-all-the-pages`' generated tiles/cache (4.3 GB / 545k files).
 - installs a **continuous** CouchDB replication doc so `bhl-lite` stays current.
+
+Total upload is **~23 GB**. On a typical domestic upstream that is several
+hours — start days before the workshop, not the night before.
 
 ## 4. Serve on the workshop URLs
 The workshop content links to `https://iphylo.org/<site>/`, and the container
@@ -54,10 +77,12 @@ Lower the DNS TTL a day or two beforehand so a failover switch takes effect fast
    the user interface depends on them, so the site serves fine on Hetzner
    without touching them. Leave as-is for the workshop.
 
-2. **bhl-all-the-pages**: `cells.php` / `tiles/` are generated & gitignored.
-   Either rsync them up or rebuild on the server (`build_cells.php`,
-   `build_tiles.php`). Do this before the workshop — it's the one site that
-   won't work straight out of a `git clone`.
+2. **bhl-all-the-pages**: `cells.php`, `tiles/` and `cache/` are generated &
+   gitignored, so a bare `git clone` won't render. `sync-to-cloud.sh` now pushes
+   them (step 2/3) as a tar stream — it's ~545,000 tiny files, and rsync at that
+   file count is dominated by per-file round-trips. Rebuilding on the server
+   (`build_cells.php`, `build_tiles.php`) is the fallback but means re-fetching
+   from BHL. The tar stream isn't resumable; if it dies, re-run it.
 
 3. **bhl-light + git-lfs**: `tagging/uber_h3.db` is an LFS object. Install
    git-lfs on the box (`apt-get install -y git-lfs && git lfs install`) and it
