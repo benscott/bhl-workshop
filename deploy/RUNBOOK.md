@@ -59,7 +59,7 @@ this path or override `HETZNER_DIR` when running it.
 ```
 ./bootstrap.sh
 ```
-Sites now serve on `:8080/bhl-light/`, `:8080/bhl-image-search/`, etc.
+Sites now serve on port 80: `http://<host>/bhl-light/`, `/bhl-image-search/`, etc.
 
 ## 3. Sync data (on the Mini)
 ```
