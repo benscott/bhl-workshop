@@ -1,13 +1,28 @@
-# Caddy terminates TLS for the workshop hostname and proxies to the PHP
-# container. It obtains and renews a Let's Encrypt certificate automatically,
-# and redirects http:// to https:// on its own.
+# Caddy terminates TLS for the workshop hostname and proxies to the containers.
+# It obtains and renews a Let's Encrypt certificate automatically, and redirects
+# http:// to https:// on its own.
 #
 # This requires bhl-workshop.iphylo.org to resolve DIRECTLY to this box
 # (Cloudflare grey cloud / "DNS only"). If the record is proxied (orange cloud),
 # Let's Encrypt's HTTP-01 challenge is answered by Cloudflare rather than by
 # Caddy and issuance fails.
 bhl-workshop.iphylo.org {
-	reverse_proxy web:80
+	# CouchDB, reached through this same TLS endpoint. handle_path strips the
+	# prefix, so /_couch/bhl-lite arrives at CouchDB as /bhl-lite.
+	#
+	# Why: port 5984 is no longer published to the host, so CouchDB is not on
+	# the public internet at all. Replication from the Mini now travels over
+	# 443, which restrictive networks (eduroam and similar) do not block the way
+	# they block odd ports. Nothing in a browser ever talks to CouchDB -- the
+	# PHP talks to it over the internal Docker network -- so this path exists
+	# solely for replication from the Mini.
+	handle_path /_couch/* {
+		reverse_proxy couchdb:5984
+	}
+
+	handle {
+		reverse_proxy web:80
+	}
 
 	encode zstd gzip
 

@@ -48,9 +48,11 @@ services:
     environment:
       COUCHDB_USER: ${COUCHDB_USERNAME}
       COUCHDB_PASSWORD: ${COUCHDB_PASSWORD}
-    ports:
-      # Exposed so the Mini can push replication to this box. Lock this down to
-      # the Mini's IP in the firewall, or better: only expose via the TLS proxy.
-      - "5984:5984"
+    # Deliberately NOT published to the host, so CouchDB is not on the public
+    # internet at all. It is reachable on the internal Docker network (the PHP
+    # container) and through Caddy at https://<host>/_couch/ for replication
+    # from the Mini, which therefore travels over 443.
+    expose:
+      - "5984"
     volumes:
       - ./couch-data:/opt/couchdb/data
