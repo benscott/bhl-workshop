@@ -57,5 +57,9 @@ services:
     # from the Mini, which therefore travels over 443.
     expose:
       - "5984"
+    # Hard ceiling so CouchDB can never again exhaust the host and put the
+    # uvicorn search API at risk: if it exceeds this, only CouchDB is killed.
+    mem_limit: 4g
     volumes:
       - ./couch-data:/opt/couchdb/data
+      - ./couchdb/local.d:/opt/couchdb/etc/local.d:ro
