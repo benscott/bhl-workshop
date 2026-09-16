@@ -62,4 +62,7 @@ services:
     mem_limit: 4g
     volumes:
       - ./couch-data:/opt/couchdb/data
-      - ./couchdb/local.d:/opt/couchdb/etc/local.d:ro
+      # default.d, NOT local.d: the image's entrypoint writes docker.ini into
+      # local.d to inject the admin credentials, so mounting that read-only
+      # makes the container fail to start ("Read-only file system").
+      - ./couchdb/default.d:/opt/couchdb/etc/default.d:ro
