@@ -59,17 +59,36 @@ else
 fi
 
 echo "== 3/3  set up CONTINUOUS CouchDB replication (Mini -> Hetzner)"
-# A persistent doc in _replicator survives restarts and keeps the backup live.
-curl -sS -X PUT "$LOCAL_COUCH/_replicator/bhl-lite-to-cloud" \
+# CouchDB 3.x removed local endpoints: BOTH source and target must be full URLs
+# (a bare "bhl-lite" gets 403 local_endpoints_not_supported), and _replicator
+# has to exist on this machine first -- a fresh CouchDB does not create it.
+for db in _users _replicator _global_changes; do
+  curl -s -o /dev/null -X PUT "$LOCAL_COUCH/$db" || true
+done
+
+# A persistent doc in _replicator survives restarts and keeps the copy live.
+rep_body=$(mktemp)
+rep_code=$(curl -s -o "$rep_body" -w '%{http_code}' -X PUT \
+  "$LOCAL_COUCH/_replicator/bhl-lite-to-cloud" \
   -H 'Content-Type: application/json' \
   -d "{
         \"_id\": \"bhl-lite-to-cloud\",
-        \"source\": \"bhl-lite\",
+        \"source\": \"$LOCAL_COUCH/bhl-lite\",
         \"target\": \"$REMOTE_COUCH/bhl-lite\",
         \"create_target\": true,
         \"continuous\": true
-      }" && echo
+      }")
+
+case "$rep_code" in
+  20*) echo "   replication doc installed (HTTP $rep_code)" ;;
+  409) echo "   replication doc already exists (HTTP 409) -- leaving it alone" ;;
+  *)   # Never print the raw body: the URLs in it carry credentials.
+       echo "!! replication FAILED (HTTP $rep_code):" >&2
+       sed -E 's#://[^@]*@#://***:***@#g' "$rep_body" >&2; echo >&2
+       rm -f "$rep_body"; exit 1 ;;
+esac
+rm -f "$rep_body"
 
 echo
-echo "Done. Check replication status:"
-echo "  curl -s $LOCAL_COUCH/_scheduler/docs/_replicator/bhl-lite-to-cloud | python3 -m json.tool"
+echo "Done. Check replication status with:"
+echo '  curl -s "$LOCAL_COUCH/_scheduler/docs/_replicator/bhl-lite-to-cloud" | python3 -m json.tool'
