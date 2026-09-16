@@ -72,15 +72,26 @@ for dir in */; do
   fi
 done
 
-# SQLite in WAL mode creates -wal/-shm sidecars beside the database even for
-# read-only queries, so the directory must be writable by the web container's
-# www-data (uid 33) or every SELECT fails with "attempt to write a readonly
-# database". Applies to any site shipping a .db, so new demos get it too.
+# PHP runs as www-data (uid 33) inside the container, but everything here is
+# cloned and untarred as root. Two things consequently need handing over, and
+# both failed in ways that looked like site bugs rather than permissions:
+#
+#   *.db   SQLite in WAL mode writes -wal/-shm sidecars beside the database even
+#          for a pure SELECT, so a root-owned directory makes every query fail
+#          with "attempt to write a readonly database".
+#   cache/ sites that fetch remote images write them here (bhl-all-the-pages'
+#          tile.php fopen()s a .part file), so a root-owned cache/ is a warning
+#          and a broken tile.
+#
+# Keyed off what a site contains, so demos added later are covered too.
 for dir in */; do
   dir=${dir%/}
   if compgen -G "$dir/*.db" >/dev/null 2>&1; then
     echo "== $dir ships a SQLite db; making it writable by www-data"
     chown -R 33:33 "$dir"
+  elif [[ -d "$dir/cache" ]]; then
+    echo "== $dir has a cache/; making it writable by www-data"
+    chown -R 33:33 "$dir/cache"
   fi
 done
 
