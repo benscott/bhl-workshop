@@ -9,6 +9,20 @@ if [[ ! -f .env ]]; then
   exit 1
 fi
 
+# Preflight ------------------------------------------------------------------
+for c in git docker; do
+  command -v "$c" >/dev/null 2>&1 || { echo "!! $c not installed" >&2; exit 1; }
+done
+
+# bhl-light tracks tagging/uber_h3.db via git-lfs. Without git-lfs the clone
+# still succeeds but leaves a pointer file. That's harmless for the workshop
+# (only the tagging/data-prep scripts read it), so warn rather than fail.
+if ! command -v git-lfs >/dev/null 2>&1; then
+  echo "-- note: git-lfs not installed; bhl-light/tagging/uber_h3.db will be a"
+  echo "   pointer, not the real file. The UI doesn't need it. To get it:"
+  echo "   apt-get install -y git-lfs && git lfs install"
+fi
+
 mkdir -p sites couch-data
 cd sites
 

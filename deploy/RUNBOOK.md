@@ -5,8 +5,9 @@ Data flows **Mini → Hetzner** (outbound push, works through home NAT).
 
 ## 0. Provision the box
 - Hetzner CX22/CPX11 + a ~40 GB volume (code + `bhl.db` ~14 GB + CouchDB ~6 GB).
-- Install Docker + docker compose. Open ports 80/443; restrict 5984 to the
-  Mini's IP (or only expose CouchDB via the TLS proxy).
+- Install Docker + docker compose, `git`, and (optionally) `git-lfs`.
+  Open ports 80/443; restrict 5984 to the Mini's IP (or only expose CouchDB
+  via the TLS proxy).
 - Clone this repo and work in `deploy/`:
   ```
   git clone https://github.com/rdmpage/bhl-workshop.git /opt/bhl-workshop
@@ -58,12 +59,19 @@ Lower the DNS TTL a day or two beforehand so a failover switch takes effect fast
    `build_tiles.php`). Do this before the workshop — it's the one site that
    won't work straight out of a `git clone`.
 
-3. **bhl-image-search** needs `BHL_SEARCH_API` + `BHL_SEARCH_KEY` in `.env`
+3. **bhl-light + git-lfs**: `tagging/uber_h3.db` is an LFS object. Without
+   git-lfs on the box it clones as a pointer file — harmless, since only the
+   tagging/data-prep scripts read it. `bootstrap.sh` warns if that's the case.
+   (Separately: the *Mac mini* has `filter.lfs.required true` in its global
+   gitconfig but no `git-lfs` binary, so bhl-light clones fail there until you
+   `brew install git-lfs`.)
+
+4. **bhl-image-search** needs `BHL_SEARCH_API` + `BHL_SEARCH_KEY` in `.env`
    (copy the real values from the Mini's gitignored `env.php`). It calls a
    separate CLIP search API — confirm that box is up, it is *not* part of this
    compose stack.
 
-4. **Secrets** (CouchDB pw, BHL API key, imgproxy key/salt, search key) live only
+5. **Secrets** (CouchDB pw, BHL API key, imgproxy key/salt, search key) live only
    in the server's `.env`. This repo is public — if any were ever committed
    anywhere, rotate them.
 
