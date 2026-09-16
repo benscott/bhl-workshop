@@ -72,28 +72,21 @@ for dir in */; do
   fi
 done
 
-# PHP runs as www-data (uid 33) inside the container, but everything here is
-# cloned and untarred as root. Two things consequently need handing over, and
-# both failed in ways that looked like site bugs rather than permissions:
+# PHP runs as www-data (uid 33) in the container, while everything here is
+# cloned and untarred as root, so anything a site needs to write is denied. That
+# bit three separate times, each looking like a site bug rather than a
+# permissions one:
+#   - SQLite in WAL mode writes -wal/-shm beside the .db even for a pure SELECT
+#     ("attempt to write a readonly database")
+#   - tile.php downloads source images into cache/ before resizing
+#   - tile.php writes the tile it generated back into tiles/
 #
-#   *.db   SQLite in WAL mode writes -wal/-shm sidecars beside the database even
-#          for a pure SELECT, so a root-owned directory makes every query fail
-#          with "attempt to write a readonly database".
-#   cache/ sites that fetch remote images write them here (bhl-all-the-pages'
-#          tile.php fopen()s a .part file), so a root-owned cache/ is a warning
-#          and a broken tile.
-#
-# Keyed off what a site contains, so demos added later are covered too.
-for dir in */; do
-  dir=${dir%/}
-  if compgen -G "$dir/*.db" >/dev/null 2>&1; then
-    echo "== $dir ships a SQLite db; making it writable by www-data"
-    chown -R 33:33 "$dir"
-  elif [[ -d "$dir/cache" ]]; then
-    echo "== $dir has a cache/; making it writable by www-data"
-    chown -R 33:33 "$dir/cache"
-  fi
-done
+# Rather than keep guessing which subdirectory each demo writes to, hand the
+# whole tree over. Trade-off: PHP can then write its own code, which is fine on
+# a demo box but would not be on a public app. git is unaffected -- bootstrap
+# runs as root.
+echo "== making sites/ writable by www-data (uid 33)"
+chown -R 33:33 .
 
 cd ..
 docker compose up -d --build
