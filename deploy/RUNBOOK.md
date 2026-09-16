@@ -59,12 +59,12 @@ Lower the DNS TTL a day or two beforehand so a failover switch takes effect fast
    `build_tiles.php`). Do this before the workshop — it's the one site that
    won't work straight out of a `git clone`.
 
-3. **bhl-light + git-lfs**: `tagging/uber_h3.db` is an LFS object. Without
-   git-lfs on the box it clones as a pointer file — harmless, since only the
-   tagging/data-prep scripts read it. `bootstrap.sh` warns if that's the case.
-   (Separately: the *Mac mini* has `filter.lfs.required true` in its global
-   gitconfig but no `git-lfs` binary, so bhl-light clones fail there until you
-   `brew install git-lfs`.)
+3. **bhl-light + git-lfs**: `tagging/uber_h3.db` is an LFS object. Install
+   git-lfs on the box (`apt-get install -y git-lfs && git lfs install`) and it
+   clones as the real 196K SQLite file. Without git-lfs the clone still
+   succeeds but leaves a pointer — harmless, since only the tagging/data-prep
+   scripts read it. `bootstrap.sh` warns if that's the case.
+   (Verified 2026-09-16: with git-lfs installed, all four repos clone clean.)
 
 4. **bhl-image-search** needs `BHL_SEARCH_API` + `BHL_SEARCH_KEY` in `.env`
    (copy the real values from the Mini's gitignored `env.php`). It calls a
