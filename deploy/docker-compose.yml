@@ -13,7 +13,8 @@
 
 services:
   web:
-    image: php:8.3-apache
+    # Built from ./Dockerfile so gd (with webp) and pdo_sqlite are compiled in.
+    build: .
     restart: unless-stopped
     ports:
       - "8080:80"
@@ -25,12 +26,6 @@ services:
       # exactly that path inside the container. Read-write, because SQLite needs
       # to create its -wal/-shm sidecars beside the file.
       - ./sites/bhl-name-timeline:/Users/rpage/Sites/bhl-data-new-ideas-o
-    # Enable mod_rewrite (the sites rely on .htaccess) and install the PHP
-    # extensions the sites need, then run Apache.
-    command: >
-      bash -c "a2enmod rewrite &&
-               docker-php-ext-install pdo_sqlite >/dev/null 2>&1 || true &&
-               apache2-foreground"
     depends_on:
       - couchdb
 

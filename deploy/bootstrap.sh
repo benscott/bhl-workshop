@@ -85,7 +85,7 @@ for dir in */; do
 done
 
 cd ..
-docker compose up -d
+docker compose up -d --build
 
 # CouchDB 3.x does not create its own system databases, and an empty _all_dbs
 # means a single node logs warnings and some endpoints fail. Wait for it to
