@@ -62,12 +62,12 @@ services:
     mem_limit: 4g
     volumes:
       - ./couch-data:/opt/couchdb/data
-      # Mount the single FILE into default.d, not the directory. The image
-      # ships default.d/10-docker-default.ini and mounting a directory over it
-      # hides that file, whereupon CouchDB exits 1 with no log output at all.
-      # local.d is not an option either: the entrypoint writes docker.ini there
-      # to inject the admin credentials, so it cannot be read-only -- and making
-      # it writable would drop those credentials into the repo working tree.
-      # Caveat of a single-file mount: the inode is pinned, so after editing
-      # this ini run `docker compose up -d --force-recreate couchdb`.
-      - ./couchdb/20-workshop.ini:/opt/couchdb/etc/default.d/20-workshop.ini:ro
+      # local.d, mounted READ-WRITE. Three things forced this shape:
+      #   - mounting a directory over default.d hides the image's own
+      #     10-docker-default.ini and CouchDB then exits 1 with no log output
+      #   - mounting a single file INTO default.d also kills it silently
+      #   - local.d cannot be read-only: the entrypoint writes docker.ini there
+      #     to inject COUCHDB_USER/PASSWORD
+      # Consequence: docker.ini lands here containing the admin password, so it
+      # is gitignored.
+      - ./couchdb/local.d:/opt/couchdb/etc/local.d

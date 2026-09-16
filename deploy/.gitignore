@@ -10,6 +10,8 @@ sites/
 *.db-shm
 *.db-wal
 couch-data/
+# written by the CouchDB entrypoint; contains the admin password
+couchdb/local.d/docker.ini
 caddy-data/
 caddy-config/
 
