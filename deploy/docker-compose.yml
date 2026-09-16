@@ -1,0 +1,43 @@
+# Brings up the whole workshop stack: one Apache+PHP container serving all four
+# sites as subdirectories, plus CouchDB. Run on the Hetzner box.
+#
+#   docker compose up -d
+#
+# Sites are served at:
+#   http://HOST/bhl-light/            (expects web_root '/bhl-light/')
+#   http://HOST/bhl-name-timeline/
+#   http://HOST/bhl-all-the-pages/
+#   http://HOST/bhl-image-search/
+#
+# Put a real TLS reverse proxy (Caddy/Traefik) in front for the workshop URL.
+
+services:
+  web:
+    image: php:8.3-apache
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    env_file: .env
+    volumes:
+      - ./sites:/var/www/html
+    # Enable mod_rewrite (the sites rely on .htaccess) and install the PHP
+    # extensions the sites need, then run Apache.
+    command: >
+      bash -c "a2enmod rewrite &&
+               docker-php-ext-install pdo_sqlite >/dev/null 2>&1 || true &&
+               apache2-foreground"
+    depends_on:
+      - couchdb
+
+  couchdb:
+    image: couchdb:3.4
+    restart: unless-stopped
+    environment:
+      COUCHDB_USER: ${COUCHDB_USERNAME}
+      COUCHDB_PASSWORD: ${COUCHDB_PASSWORD}
+    ports:
+      # Exposed so the Mini can push replication to this box. Lock this down to
+      # the Mini's IP in the firewall, or better: only expose via the TLS proxy.
+      - "5984:5984"
+    volumes:
+      - ./couch-data:/opt/couchdb/data

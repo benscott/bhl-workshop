@@ -1,0 +1,14 @@
+# Secrets — never commit
+.env
+**/env.php
+
+# Cloned site code (managed by bootstrap.sh)
+sites/
+
+# Heavy data that gets synced, not committed
+*.db
+*.db-shm
+*.db-wal
+couch-data/
+
+.DS_Store
