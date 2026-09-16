@@ -51,7 +51,10 @@ cd sites
 
 clone_or_pull () { # $1 = repo url, $2 = dir
   if [[ -d "$2/.git" ]]; then
-    echo "== updating $2"; git -C "$2" pull --ff-only
+    # safe.directory: this script chowns sites/ to www-data (see below), and git
+    # refuses to touch a repo owned by another user ("detected dubious
+    # ownership"), so every pull after the first bootstrap would fail.
+    echo "== updating $2"; git -c safe.directory="*" -C "$2" pull --ff-only
   else
     echo "== cloning $2"; git clone "$1" "$2"
   fi
