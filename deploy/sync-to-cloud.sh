@@ -37,7 +37,7 @@ rsync -avP --inplace --partial \
   "$HETZNER_SSH:$HETZNER_DIR/sites/bhl-name-timeline/bhl.db"
 
 echo "== 2/3  push bhl-all-the-pages generated data (4.3 GB) -> Hetzner"
-# cells.php, tiles/ and cache/ are gitignored, so bootstrap.sh's clone won't
+# cells.php, config.php, tiles/ and cache/ are gitignored, so bootstrap.sh's clone won't
 # have them and the site won't render without this. Rebuilding on the server
 # instead means re-fetching from BHL, which is far slower than pushing.
 #
@@ -52,7 +52,7 @@ echo "== 2/3  push bhl-all-the-pages generated data (4.3 GB) -> Hetzner"
 #     "$HETZNER_SSH:$HETZNER_DIR/sites/bhl-all-the-pages/"
 if [[ -d "$LOCAL_PAGES/tiles" ]]; then
   ssh "$HETZNER_SSH" "mkdir -p $HETZNER_DIR/sites/bhl-all-the-pages"
-  tar -C "$LOCAL_PAGES" -cf - cells.php tiles cache \
+  tar -C "$LOCAL_PAGES" -cf - cells.php config.php tiles cache \
     | ssh "$HETZNER_SSH" "tar -C $HETZNER_DIR/sites/bhl-all-the-pages -xf -"
 else
   echo "   (skipping -- no tiles/ found at $LOCAL_PAGES)"
