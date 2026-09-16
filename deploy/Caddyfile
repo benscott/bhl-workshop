@@ -20,6 +20,15 @@ bhl-workshop.iphylo.org {
 		reverse_proxy couchdb:5984
 	}
 
+	# CouchDB's replicator authenticates by POSTing to /_session at the HOST
+	# ROOT, not under the target's path prefix, so proxying CouchDB only at
+	# /_couch/ makes replication fail with replication_auth_error. Route the
+	# root /_session to CouchDB as well. No site uses this path -- the demos all
+	# live under /bhl-*/ -- so there is no collision.
+	handle /_session* {
+		reverse_proxy couchdb:5984
+	}
+
 	handle {
 		reverse_proxy web:80
 	}
