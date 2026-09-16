@@ -36,7 +36,10 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      # Mount the DIRECTORY, not the file. A single-file bind mount pins the
+      # inode, so `git pull` replacing Caddyfile leaves the container serving
+      # the old copy while the host shows the new one.
+      - ./caddy:/etc/caddy:ro
       - ./caddy-data:/data
       - ./caddy-config:/config
     depends_on:
