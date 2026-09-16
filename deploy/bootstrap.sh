@@ -4,6 +4,28 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
+# ---------------------------------------------------------------------------
+# The demo sites. TO ADD ONE: append a "<repo-url> <dir>" line here, re-run this
+# script, done. The dir name is also the URL path -- sites/foo is served at
+# /foo/ -- because docker-compose bind-mounts this whole directory into the web
+# container, so a new site needs no compose edit and no restart.
+#
+# Caveats for a new demo:
+#   - the repo must be PUBLIC (cloned over unauthenticated https)
+#   - a composer.json is handled automatically (see below)
+#   - PHP here is lean: pdo_sqlite, curl, mbstring, dom, xml. Anything needing
+#     gd / intl / zip / pdo_mysql / pdo_pgsql must be added to the
+#     docker-php-ext-install line in docker-compose.yml
+#   - generated or bulk data (cf. bhl-all-the-pages tiles/) needs its own step
+#     in sync-to-cloud.sh; a git clone alone will not carry it
+# ---------------------------------------------------------------------------
+SITES=(
+  "https://github.com/rdmpage/bhl-light.git          bhl-light"
+  "https://github.com/rdmpage/bhl-name-timeline.git  bhl-name-timeline"
+  "https://github.com/rdmpage/bhl-all-the-pages.git  bhl-all-the-pages"
+  "https://github.com/rdmpage/bhl-image-search.git   bhl-image-search"
+)
+
 if [[ ! -f .env ]]; then
   echo "!! No .env — copy .env.template to .env and fill it in first." >&2
   exit 1
@@ -35,15 +57,20 @@ clone_or_pull () { # $1 = repo url, $2 = dir
   fi
 }
 
-clone_or_pull https://github.com/rdmpage/bhl-light.git          bhl-light
-clone_or_pull https://github.com/rdmpage/bhl-name-timeline.git  bhl-name-timeline
-clone_or_pull https://github.com/rdmpage/bhl-all-the-pages.git  bhl-all-the-pages
-clone_or_pull https://github.com/rdmpage/bhl-image-search.git   bhl-image-search
+for entry in "${SITES[@]}"; do
+  read -r url dir <<<"$entry"
+  clone_or_pull "$url" "$dir"
+done
 
-# bhl-light uses Composer (vendor/ is gitignored).
-if [[ -f bhl-light/composer.json ]]; then
-  ( cd bhl-light && docker run --rm -v "$PWD":/app composer:2 install --no-dev )
-fi
+# Any site with a composer.json gets its deps installed -- vendor/ is gitignored
+# so it never arrives with the clone, and a missing one is an autoload fatal.
+for dir in */; do
+  dir=${dir%/}
+  if [[ -f "$dir/composer.json" ]]; then
+    echo "== composer install for $dir"
+    ( cd "$dir" && docker run --rm -v "$PWD":/app composer:2 install --no-dev )
+  fi
+done
 
 cd ..
 docker compose up -d
