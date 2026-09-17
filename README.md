@@ -157,11 +157,42 @@ We have a short quiz:
 - what could you do with it?
 - how important is it to search by individual images (e.g., figures, not pages)
 
-
-
 ## BHL knowledge discovery layer (NHM)
 
-Qianqian Hiris Gu and Ben Hartley from The Natural History Museum in London are working on extracting knowledge from BHL text. In this part of the workshop they will give an overview of their work, exploring what  of the latest document understanding tools can tell us about BHL content.
+Qianqian Hiris Gu from the Natural History Museum in London will introduce a new project to build a search and discovery interface for BHL.
+
+The one-year project launched in June 2026 and will use AI tools to improve the text extracted from scanned pages using optical character recognition (OCR), identify individual articles within volumes, and extract illustrations and tables.
+
+Improving the OCR could make information discoverable that was previously missed or misread, such as scientific names, collector names and specimen identifiers. Identifying individual articles will also help users find and cite the relevant work within a larger volume.
+
+Alongside this, we will identify several types of information—or “entities”—mentioned in the literature:
+
+- **Taxa:** scientific names, including historical names and variations in how they are written.
+- **People:** collectors, authors and other people mentioned in the text.
+- **Places:** localities, including historical place names.
+- **Institutions:** museums, herbaria and other organisations, including their names and collection codes.
+- **Specimen identifiers:** catalogue and accession numbers that can help connect literature to specimens held in collections.
+
+We will also explore extracting references to habitats and geological units or time periods. Wherever possible, the entities will be linked to records in resources such as GBIF, Catalogue of Life and Wikidata.
+
+These links can help bring together different names or abbreviations for the same taxon, person or institution. We will retain the original wording and links to the source pages so users can check the information and assess uncertain matches.
+
+### What will the interface offer?
+
+We are building a web-based search and discovery interface alongside the existing BHL website. Users will be able to search the full text or search for any of the entities listed above, then filter results by content type (for example, book, article, image or table), publication date and author.
+
+For example, you could search for illustrations associated with a particular species in publications from 1950 to 1960. Each result will link back to the original BHL page so you can view it in context.
+
+### Help shape the discovery layer
+
+We will give an overview of these plans and invite suggestions from participants:
+
+- What would you like to find in BHL that is difficult to find today?
+- Which entities or other information should we prioritise?
+- How would you like results to be presented, and which search or filtering features would be most useful?
+- What evidence would you need to trust and use information extracted automatically from BHL?
+
+Your suggestions will help us refine the interface and prioritise the information it makes available.
 
 
 ## BHL and geography
