@@ -21,11 +21,6 @@ services:
     env_file: .env
     volumes:
       - ./sites:/var/www/html
-      # bhl-name-timeline's config.inc.php hardcodes the Mac path to its SQLite
-      # database. Rather than patch the site repo, mount the synced copy at
-      # exactly that path inside the container. Read-write, because SQLite needs
-      # to create its -wal/-shm sidecars beside the file.
-      - ./sites/bhl-name-timeline:/Users/rpage/Sites/bhl-data-new-ideas-o
     depends_on:
       - couchdb
 

@@ -120,3 +120,48 @@ Lower the DNS TTL a day or two beforehand so a failover switch takes effect fast
 ## Keeping the backup fresh
 - CouchDB: continuous replication handles it automatically.
 - `bhl.db`: re-run `sync-to-cloud.sh` (or cron it on the Mini) when it changes.
+
+---
+
+## Working from another machine (e.g. a laptop in Oslo)
+
+Nothing here is tied to the Mac mini except the bulk data. To add a demo from
+any machine:
+
+1. **Get SSH access to the box.** Generate a key and have an existing machine
+   authorise it, or copy the `bhl-hetzner` alias into that machine's
+   `~/.ssh/config`:
+   ```
+   Host bhl-hetzner 89.167.34.51 ubuntu-8gb-hel1-1
+       HostName 89.167.34.51
+       User root
+       IdentityFile ~/.ssh/<your-key>
+       IdentitiesOnly yes
+       ServerAliveInterval 30
+   ```
+
+2. **Add the demo** — clone this repo, append one line to the `SITES` array in
+   `bootstrap.sh`, commit and push.
+
+3. **Deploy it:**
+   ```
+   ssh bhl-hetzner
+   cd /opt/bhl-workshop && git pull && cd deploy && ./bootstrap.sh
+   ```
+
+That is the whole loop for a code-only demo, and it needs neither the Mini nor
+`sync-to-cloud.sh`. The site appears at `https://bhl-workshop.iphylo.org/<dir>/`
+with TLS already handled.
+
+**A demo carrying bulk data is different.** `sync-to-cloud.sh` pushes from
+whichever machine holds the data, and its defaults point at the Mini's paths
+(`$HOME/Sites/iphylo/...`), so override them:
+```
+LOCAL_SQLITE=/path/to/your.db LOCAL_PAGES=/path/to/pages ./sync-to-cloud.sh
+```
+If the data only exists on the Mini, it has to originate there — it is 13-24 GB
+per database and the Mini is behind home NAT, so it pushes out, nothing pulls in.
+
+**Faster option worth checking first:** if the data is downloadable from a URL,
+fetch it *on the box* instead. Hetzner pulls at datacentre speed in minutes,
+where a domestic upstream takes hours.

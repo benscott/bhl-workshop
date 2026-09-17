@@ -24,7 +24,7 @@ To help get a sense of your interests, and your experience (if any) with BHL, we
 
 ## BHL overview
 
-The website [BHL on a Hilbert curve](https://iphylo.org/bhl-all-the-pages/) is an attempt to show a small fraction of BHL on a single web page, just to give a sense of the diversity of content in BHL, and one of the primary challenges, which is finding stuff.
+The website [BHL on a Hilbert curve](https://bhl-workshop.iphylo.org/bhl-all-the-pages/) is an attempt to show a small fraction of BHL on a single web page, just to give a sense of the diversity of content in BHL, and one of the primary challenges, which is finding stuff.
 
 
 If you are taking part in this workshop it is likely that you have some experience with BHL, never the less it is probably worth listing some of the ways to access BHL.
@@ -54,7 +54,7 @@ The same article in four different viewers:
 
 - [Current BHL viewer](https://www.biodiversitylibrary.org/item/244617)
 - [EJT PDF viewer](https://europeanjournaloftaxonomy.eu/index.php/ejt/article/view/76/25)
-- [BHL Light viewer](https://iphylo.org/bhl-light/item/244617)
+- [BHL Light viewer](https://bhl-workshop.iphylo.org/bhl-light/item/244617)
 - [Experimental responsive viewer](https://rdmpage.github.io/responsive-viewer/) (code on [GitHub](https://github.com/rdmpage/responsive-viewer))
 
 ![bhlviewer](bhlviewer.png)
@@ -94,7 +94,7 @@ Arguably BHL’s “killer feature” is taxonomic name indexing, provided by [G
 
 Viewing changes in word usage overtime was popularised by the [Google Books Ngram Viewer](https://books.google.com/ngrams/) tool. Ryan Schenk's synynyms tool (now offline, see [Taxonomic name timelines for BHL](https://iphylo.blogspot.com/2016/12/taxonomic-name-timelines-for-bhl.html), Ryan’s code is in [GitHub](https://github.com/rschenk/synynyms)) was an early example of a similar approach to taxonomic names. 
 
-In this workshop we will use a simple tool that traces the occurrences of a taxonomic name in BHL over time. In contrast to BHL itself, the [BHL Name Timeline](https://iphylo.org/bhl-name-timeline/) attempts to aggregate occurrences of names by BHL item or part (in other words, if a name occurs in several pages that are part of the same article, BHL Name Timeline lists those occurrences just once).
+In this workshop we will use a simple tool that traces the occurrences of a taxonomic name in BHL over time. In contrast to BHL itself, the [BHL Name Timeline](https://bhl-workshop.iphylo.org/bhl-name-timeline/) attempts to aggregate occurrences of names by BHL item or part (in other words, if a name occurs in several pages that are part of the same article, BHL Name Timeline lists those occurrences just once).
 
 You can ask the tool to fetch synonymns for a taxonomic name from the [Catalogue of Life](https://www.catalogueoflife.org), or you can list two or more names separated by comma. For example, you can compare usages of two alternative names for the [sperm whale](https://en.wikipedia.org/wiki/Sperm_whale), _Physeter catodon_ and _Physeter macrocephalus_ (for fun see the Wikipedia talk page on these two names [catodon](https://en.wikipedia.org/w/index.php?title=Talk:Sperm_whale/Archive_1&commentname=h-UtherSRG-2008-10-03T04%3A59%3A00.000Z&section=catodon#:~:text=We%20should%20follow%20MSW3%2C%20as%20it%20is%20what%20is%20used%20in%20nearly%20all%20other%20mammal%20articles%20on%20Wikipedia.)).
 
@@ -126,7 +126,7 @@ Tools like this image classifier could help BHL automate the tags it assigns to 
 
 ### Image search
 
-The image classifier Mike Trizna put together inspired the next tool we will look at, [BHL image search](https://iphylo.org/bhl-image-search/), code on [GitHub](https://github.com/rdmpage/bhl-all-the-images). This tool takes a small subset of BHL page images and uses the CLIP model to convert each model to an [embedding](https://en.wikipedia.org/wiki/Embedding_(machine_learning)), that is a vector or list of numbers that represent that image. Images that are similar in some sense will typically have similar vectors, which makes images searchable. 
+The image classifier Mike Trizna put together inspired the next tool we will look at, [BHL image search](https://bhl-workshop.iphylo.org/bhl-image-search/), code on [GitHub](https://github.com/rdmpage/bhl-all-the-images). This tool takes a small subset of BHL page images and uses the CLIP model to convert each model to an [embedding](https://en.wikipedia.org/wiki/Embedding_(machine_learning)), that is a vector or list of numbers that represent that image. Images that are similar in some sense will typically have similar vectors, which makes images searchable. 
 
 #### Find similar images
 
@@ -134,11 +134,11 @@ For example, consider this image from Wikipedia [_Acraea violae_](https://en.wik
 
 ![Acraea violae](Tawny_Coster(হরিনছড়া)DSC_0165.JPG)
 
-We can upload this to https://iphylo.org/bhl-image-search/ and click **Find similar pages** and the site returns images from BHL that resemble that butterfly. You can try this with any image.
+We can upload this to https://bhl-workshop.iphylo.org/bhl-image-search/ and click **Find similar pages** and the site returns images from BHL that resemble that butterfly. You can try this with any image.
 
 #### Find images of...
 
-The CLIP model enables you to search for images based on text, foe example, here are the results for search for [red flowers](https://iphylo.org/bhl-image-search/?q=red+flowers&k=12):
+The CLIP model enables you to search for images based on text, foe example, here are the results for search for [red flowers](https://bhl-workshop.iphylo.org/bhl-image-search/?q=red+flowers&k=12):
 
 ![imagesearch](imagesearch.png)
 
@@ -182,7 +182,7 @@ BioStor comprises the largest source of articles in BHL, and also serves as an e
 ![allmaps_image](allmaps_image.png)
 
 1. Go to https://editor.allmaps.org/
-2. Paste in the IIIF manifest for a BHL item. You can get these from https://iphylo.org/bhl-light, for example https://iphylo.org/bhl-light/item/148293/manifest.json
+2. Paste in the IIIF manifest for a BHL item. You can get these from https://bhl-workshop.iphylo.org/bhl-light, for example https://bhl-workshop.iphylo.org/bhl-light/item/148293/manifest.json
 3. Pick an image with a map, for example “Image 8”. Double click to load it into the editor.
 4. Use the <img src="polygon.png" height="32"> tool to draw a rectangle or polygon around the map, once you have the polygon you like, double-click, and then click “Finish”. If the shape you have created isn’t what you want, click on the “Map” button on the bottom right to see a list of the polygons you have drawn and delete them.
 5. Click on the <img src="pin.png" height="32"> pin tool to load a view of the map image and a map of the world.
