@@ -179,7 +179,7 @@ These links can help bring together different names or abbreviations for the sam
 
 ### What will the interface offer?
 
-<img src="slido=qr-code.png">
+![Search and discovery quiz](slido-qr-code.png)
 
 We are building a web-based search and discovery interface alongside the existing BHL website. Users will be able to search the full text or search for any of the entities listed above, then filter results by content type (for example, book, article, image or table), publication date and author.
 
