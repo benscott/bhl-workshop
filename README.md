@@ -126,6 +126,14 @@ and the tool will return the probability that the image belongs in each of those
 
 Tools like this image classifier could help BHL automate the tags it assigns to pages, perhaps enabling users to search for categories of pages (e.g., "show me pages that display maps").
 
+#### IIIF Illustration Detector 
+
+The [IIIF Illustration Detector](https://huggingface.co/spaces/small-models-for-glam/iiif-illustration-detector) is a cool demonstration of using a [small LLM that runs in your browser](https://huggingface.co/small-models-for-glam/historical-illustration-detector) to decided whether a page has an illustration or not. It needs a IIIF manifest for the item whose pages you want to classify, you can get manifests from BHL-Light, e.g. https://bhl-workshop.iphylo.org/bhl-light/item/244617/manifest.json
+
+Paste in a manifest, click “Load Manifest” then “Classify” and it works through each page as you watch.
+
+![iiifdetector](iiifdetector.png)
+
 
 ### Image search
 
