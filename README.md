@@ -179,6 +179,8 @@ These links can help bring together different names or abbreviations for the sam
 
 ### What will the interface offer?
 
+<img src="slido=qr-code.png">
+
 We are building a web-based search and discovery interface alongside the existing BHL website. Users will be able to search the full text or search for any of the entities listed above, then filter results by content type (for example, book, article, image or table), publication date and author.
 
 For example, you could search for illustrations associated with a particular species in publications from 1950 to 1960. Each result will link back to the original BHL page so you can view it in context.
