@@ -6,7 +6,7 @@
 
 This is a workshop on the [Biodiversity Heritage Library](https://www.biodiversitylibrary.org) (BHL), a large, open access collection  of literature on biodiversity.
 
-The goal is to explore some approaches to discovering content in the more than 64 million pages BHL provides. Most of these approaches are exploratory, "proof of concept" tools, and we make no claim that these tools are fit for purpose, or indeed are the only ways we could explore BHL. Indeed, if you have ideas for ways to get more out of BHL pleasse share them.
+The goal is to explore some approaches to discovering content in the more than 64 million pages BHL provides. Most of these approaches are exploratory, "proof of concept" tools, and I make no claim that these tools are fit for purpose, or indeed are the only ways we could explore BHL. Indeed, if you have ideas for ways to get more out of BHL please share them.
 
 While the workshop is an in-person event, the activities are all online, so if you are not able to attended you should still be able to get something from this event.
 
@@ -20,12 +20,13 @@ To help get a sense of your interests, and your experience (if any) with BHL, we
 - what is your background? (taxonomist, developer, data scientist, )
 - how often do you use BHL? (daily, weekly, monthly, infrequently, never)
 - what do you like most about BHL?
+- if you could pick one thing to improve BHL what would it be?
+
 
 
 ## BHL overview
 
 The website [BHL on a Hilbert curve](https://bhl-workshop.iphylo.org/bhl-all-the-pages/) is an attempt to show a small fraction of BHL on a single web page, just to give a sense of the diversity of content in BHL, and one of the primary challenges, which is finding stuff.
-
 
 If you are taking part in this workshop it is likely that you have some experience with BHL, never the less it is probably worth listing some of the ways to access BHL.
 
@@ -36,33 +37,35 @@ If you are taking part in this workshop it is likely that you have some experien
 - there are [data downloads and a well documented API](https://about.biodiversitylibrary.org/tools-and-services/developer-and-data-tools/)
 - you can access images and OCR text directly via [Amazon Web Services](https://registry.opendata.aws/bhl-open-data/)
 - many of the colour plates (the "pretty") from BHL are also on [Flickr](https://www.flickr.com/photos/biodivlibrary/with/53903344408)
-- there is a [public discussion forum](https://forum.biodiversitylibrary.org)
+- there is a [discussion forum](https://forum.biodiversitylibrary.org)
 
 
 ### BHL helpers
 
 There are projects that assist BHL in adding value to its content, such as Global Names (taxonomic name indexing) and BioStor (article finding).
 
-[BioStor](https://biostor.org) has a simple search interface, as well as ways to view articles arranged by journal, and also on a map. we will explore the map feature in more detail below.
+[BioStor](https://biostor.org) has a simple search interface, as well as ways to view articles arranged by journal, and also on a map. We will explore the map feature in more detail below.
 
 
 ## Viewing content
 
 The first topic is probably the most obvious, which is how to display articles on BHL? The current site uses a "book viewer" based on code from the Internet Archive. Let's look at some of the alternatives.
 
-The same article in four different viewers:
+The same article in five different viewers:
 
 - [Current BHL viewer](https://www.biodiversitylibrary.org/item/244617)
 - [EJT PDF viewer](https://europeanjournaloftaxonomy.eu/index.php/ejt/article/view/76/25)
 - [BHL Light viewer](https://bhl-workshop.iphylo.org/bhl-light/item/244617)
+- [IIIF viewer with Plazi annotations](https://ejt.biodiversity.hasdai.org/records/fyh4q-xg421)
 - [Experimental responsive viewer](https://rdmpage.github.io/responsive-viewer/) (code on [GitHub](https://github.com/rdmpage/responsive-viewer))
 
 ![bhlviewer](bhlviewer.png)
 ![pdf](pdf.png)
+![hasdai](hasdai.png)
 ![bhl-light](bhl-light.png)
 ![responsive](responsive.png)
 
-The final viewer displays both the BHL page images, but also OCR text from [Datalab](https://www.datalab.to), and an IIIF viewer. The later is a standard widely used in the museum and archive world to display images. We will meet IIIF again below.
+The final viewer displays both the BHL page images, but also OCR text from [Datalab](https://www.datalab.to), and an IIIF viewer. The later is a standard widely used in the museum and archive world to display images. We will meet [IIIF](https://iiif.io) again below.
 
 We have a short quiz:
 
@@ -142,21 +145,17 @@ The CLIP model enables you to search for images based on text, foe example, here
 
 ![imagesearch](imagesearch.png)
 
-
 Try this for yourself. For instance, search for "maps"
-
 
 #### Beyond page images
 
 An obvious limitation of this approach is that we are comparing page images rather than individual images. A more sophisticated approach would be to separate images from text and search on just the images. There are increasingly sophisticated tool for doing this, such as those provided by Datalab (see their [playground](https://www.datalab.to/app/playground/documents/new)). Imagine being able to extract all the figures in BHL and make them searchable (see the next topic for further discussion of how feasible this is).
-
 
 We have a short quiz:
 
 - is image search useful?
 - what could you do with it?
 - how important is it to search by individual images (e.g., figures, not pages)
-
 
 
 ## BHL knowledge discovery layer (NHM)
@@ -206,7 +205,6 @@ In this workshop we will explore using MCP to “talk” to BHL and ask question
 ## BHL and knowledge graphs
 
 This section is left as an exercise for the reader (!). There is a lot of BHL-related content on Wikidata, and interesting developments around GBIF, OpenStreetMap, and RDF. 
-
 
 ## Summary
 
