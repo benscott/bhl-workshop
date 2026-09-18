@@ -187,10 +187,9 @@ For example, you could search for illustrations associated with a particular spe
 
 We will give an overview of these plans and invite suggestions from participants:
 
-- What would you like to find in BHL that is difficult to find today?
-- Which entities or other information should we prioritise?
-- How would you like results to be presented, and which search or filtering features would be most useful?
-- What evidence would you need to trust and use information extracted automatically from BHL?
+- What information would you most like to find more easily in BHL?
+- Which features would be most useful for finding and exploring information in BHL?
+- What would most help you judge whether information extracted automatically from BHL is reliable?
 
 Your suggestions will help us refine the interface and prioritise the information it makes available.
 
