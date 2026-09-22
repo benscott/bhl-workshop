@@ -15,14 +15,7 @@ The workshop starts with an opportunity to quickly introduce yourself, followed 
 
 ## Introduction
 
-To help get a sense of your interests, and your experience (if any) with BHL, we have a short Menti quiz where you can tell us a little about yourself (anonymously). There are three questions:
-
-- what is your background? (taxonomist, developer, data scientist, )
-- how often do you use BHL? (daily, weekly, monthly, infrequently, never)
-- what do you like most about BHL?
-- if you could pick one thing to improve BHL what would it be?
-
-
+To help get a sense of your interests, and your experience (if any) with BHL, we have a short Menti quiz where you can tell us a little about yourself (the quiz is anonymous). You can join the quiz using the link https://www.menti.com/0bc0bf or go to https://www.menti.com and enter the code 7724 9102.
 
 ## BHL overview
 
@@ -42,14 +35,14 @@ If you are taking part in this workshop it is likely that you have some experien
 
 ### BHL helpers
 
-There are projects that assist BHL in adding value to its content, such as Global Names (taxonomic name indexing) and BioStor (article finding).
+There are projects that assist BHL in adding value to its content, such as [Global Names](https://globalnames.org) (taxonomic name indexing) and [BioStor](https://biostor.org) (article finding).
 
 [BioStor](https://biostor.org) has a simple search interface, as well as ways to view articles arranged by journal, and also on a map. We will explore the map feature in more detail below.
 
 
-## Viewing content
+## Exercise: Viewing content
 
-The first topic is probably the most obvious, which is how to display articles on BHL? The current site uses a "book viewer" based on code from the Internet Archive. Let's look at some of the alternatives.
+The first topic is probably the most obvious: how to display articles on BHL? The current site uses a "book viewer" based on code from the Internet Archive. Let's look at some of the alternatives.
 
 The same article in five different viewers:
 
@@ -67,7 +60,7 @@ The same article in five different viewers:
 
 The final viewer displays both the BHL page images, but also OCR text from [Datalab](https://www.datalab.to), and an IIIF viewer. The later is a standard widely used in the museum and archive world to display images. We will meet [IIIF](https://iiif.io) again below.
 
-We have a short quiz:
+We have a short menti quiz:
 
 - how important is being able to see BHL on a small screen to you?
 - how important is a custom BHL viewer (versus, say, just providing PDFs?)
@@ -93,7 +86,7 @@ Can you figure out what is going on?
 
 Arguably BHL’s “killer feature” is taxonomic name indexing, provided by [Global Names](https://globalnames.org). Each page in BHL has been searched for strings that look like taxonomic names, and these have been indexed so that you can search by taxonomic name. Sometimes it finds strings that aren’t taxonomic names (or, might be taxonomic names, but in most cases aren’t). For example [Scutellum](https://www.biodiversitylibrary.org/name/Scutellum) or [Argentina](https://www.biodiversitylibrary.org/name/Argentina).
 
-### Taxonomic timelines
+### Exercise: Taxonomic timelines
 
 Viewing changes in word usage overtime was popularised by the [Google Books Ngram Viewer](https://books.google.com/ngrams/) tool. Ryan Schenk's synynyms tool (now offline, see [Taxonomic name timelines for BHL](https://iphylo.blogspot.com/2016/12/taxonomic-name-timelines-for-bhl.html), Ryan’s code is in [GitHub](https://github.com/rschenk/synynyms)) was an early example of a similar approach to taxonomic names. 
 
@@ -110,7 +103,7 @@ You can ask the tool to fetch synonymns for a taxonomic name from the [Catalogue
 
 BHL has 64 million images of pages. So far we have concentrated on exploring BHL using text, but what about images? In this section we will look at two tools for image classification and search.
 
-### Image classification
+### Demo: Image classification
 
 Mike Trizna created a [Hugging Face space](https://huggingface.co/spaces/MikeTrizna/bhl_clip_classifier) that uses OpenAI's [CLIP](https://huggingface.co/openai/clip-vit-base-patch32) model to classify BHL pages. You supply an image (there are examples you can chose from) and a list of possible categories, for example:
 - A page of printed text; 
@@ -126,7 +119,7 @@ and the tool will return the probability that the image belongs in each of those
 
 Tools like this image classifier could help BHL automate the tags it assigns to pages, perhaps enabling users to search for categories of pages (e.g., "show me pages that display maps").
 
-#### IIIF Illustration Detector 
+#### Exercise: IIIF Illustration Detector 
 
 The [IIIF Illustration Detector](https://huggingface.co/spaces/small-models-for-glam/iiif-illustration-detector) is a cool demonstration of using a [small LLM that runs in your browser](https://huggingface.co/small-models-for-glam/historical-illustration-detector) to decided whether a page has an illustration or not. It needs a IIIF manifest for the item whose pages you want to classify, you can get manifests from BHL-Light, e.g. https://bhl-workshop.iphylo.org/bhl-light/item/244617/manifest.json
 
@@ -135,7 +128,7 @@ Paste in a manifest, click “Load Manifest” then “Classify” and it works 
 ![iiifdetector](iiifdetector.png)
 
 
-### Image search
+### Exercise: Image search
 
 The image classifier Mike Trizna put together inspired the next tool we will look at, [BHL image search](https://bhl-workshop.iphylo.org/bhl-image-search/), code on [GitHub](https://github.com/rdmpage/bhl-all-the-images). This tool takes a small subset of BHL page images and uses the CLIP model to convert each model to an [embedding](https://en.wikipedia.org/wiki/Embedding_(machine_learning)), that is a vector or list of numbers that represent that image. Images that are similar in some sense will typically have similar vectors, which makes images searchable. 
 
@@ -166,7 +159,7 @@ We have a short quiz:
 - how important is it to search by individual images (e.g., figures, not pages)
 
 
-## BHL knowledge discovery layer (NHM)
+## Exercise: BHL knowledge discovery layer (NHM)
 
 Qianqian Hiris Gu and Ben Hartley from The Natural History Museum in London are working on extracting knowledge from BHL text. In this part of the workshop they will give an overview of their work, exploring what  of the latest document understanding tools can tell us about BHL content.
 
@@ -175,14 +168,14 @@ Qianqian Hiris Gu and Ben Hartley from The Natural History Museum in London are 
 
 In this part of the workshop we explore geographic interfaces to literature data. There are various interfaces to biodiversity literature, such as [JournalMap](https://www.journalmap.org) and [BioStor](https://biostor.org/map). While many will be familiar with point-based geographic data, other approaches are available such as grids (e.g., [H3](https://h3geo.org)). The defunct [Frankenplace](http://www.frankenplace.com/) project took a novel approach which mapped text terms to a geographic grid so your search would highlight regions of the world that matched that term (see [Frankenplace, geospatial search, and discrete global grid systems](https://iphylo.blogspot.com/2019/05/frankenplace-geospatial-search-and.html)).
 
-### BioStor map
+### Exercise: BioStor map
 
 BioStor comprises the largest source of articles in BHL, and also serves as an experimental platform for displaying BHL content. For example, for each article BioStor finds in BHL it looks for latitude and longitude pairs in the text and puts those on a [map](https://biostor.org/map). You can browse the map, select regions, and see what papers mention those localities. You can also upload GeoJSON (e.g., for an island) and discover what papers include that region in their content.
 
-![zeroshot](biostormap.png)
+![biostormap](biostormap.png)
 
 
-### Putting maps on the map (Allmaps)
+### Exercise: Putting maps on the map (Allmaps)
 
 [Allmaps](https://allmaps.org) is a fascinating project where people can add an image of a map to a modern map. The software will handle things such as align the map to latitude and longitude points, and rotate and stretch the map image as required. In order to work Allmaps needs the map image to be available in the [IIIF](https://iiif.io) format.
 
@@ -208,11 +201,18 @@ We have a short quiz:
 
 In amongst all the buzz and noise about AI, one of the most interesting outcomes is the [Model Context Protocol](https://en.wikipedia.org/wiki/Model_Context_Protocol) which can act as an interface between natural langauge queries in a ChatBot (such as OpenAI or Claude) and a database (or other resource). 
 
-In this workshop we will explore using MCP to “talk” to BHL and ask questions about the what is in the digital library, as well as what it can tell us about specific taxa of interest.
+~~In this workshop we will explore using MCP to “talk” to BHL and ask questions about the what is in the digital library, as well as what it can tell us about specific taxa of interest~~.
 
 ## BHL and knowledge graphs
 
-This section is left as an exercise for the reader (!). There is a lot of BHL-related content on Wikidata, and interesting developments around GBIF, OpenStreetMap, and RDF. 
+This section is left as an exercise for the reader (!). There is a lot of BHL-related content on [Wikidata](https://www.wikidata.org), and interesting developments around GBIF, OpenStreetMap, and RDF. 
+
+### Demo: Knowledge graph for BHL
+
+Andra Waagmeester has created a version of BHL in RDF. When combined with a version of GBIF hosted at the University of Freiberg, see https://ui.qlever.dev/gbif.
+
+The experimental RDF version of BHL is at https://koetai.semscape.org/u/0000-0001-9773-4008/bhl
+
 
 ## Summary
 
