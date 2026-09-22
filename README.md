@@ -2,15 +2,17 @@
 
 <img src="Qq9gaHtO6xZxA54_Untitled 2026-09-16.jpeg">
 
+# 7724 9102
+
 ## Overview
 
 This is a workshop on the [Biodiversity Heritage Library](https://www.biodiversitylibrary.org) (BHL), a large, open access collection  of literature on biodiversity.
 
-The goal is to explore some approaches to discovering content in the more than 64 million pages BHL provides. Most of these approaches are exploratory, "proof of concept" tools, and I make no claim that these tools are fit for purpose, or indeed are the only ways we could explore BHL. Indeed, if you have ideas for ways to get more out of BHL please share them.
+The goal is to explore some approaches to discovering content in the more than 64 million pages BHL provides. Most of these approaches are exploratory, "proof of concept" tools, and I make no claim that these tools are fit for purpose, or are the only ways we could explore BHL. Indeed, if you have ideas for ways to get more out of BHL please feel free to share them.
 
 While the workshop is an in-person event, the activities are all online, so if you are not able to attended you should still be able to get something from this event.
 
-The workshop starts with an opportunity to quickly introduce yourself, followed by a similarly short introduction to BHL. Then we explore a range of topics.
+The workshop starts with an opportunity to quickly introduce yourself, followed by a similarly short introduction to BHL. Then we will explore a range of topics.
 
 
 ## Introduction
@@ -191,17 +193,35 @@ BioStor comprises the largest source of articles in BHL, and also serves as an e
 8. You can adjust the opacity of both the background map and the BHL image.
 ![allmaps_opacity](allmaps_opacity.png)
 
-
 We have a short quiz:
 
 - what map-based interface works best for you?
 - are there any map interfaces you've seen that we've missed?
 
-## BHL and AI
+## BHL, AI, and knowledge graphs
 
 In amongst all the buzz and noise about AI, one of the most interesting outcomes is the [Model Context Protocol](https://en.wikipedia.org/wiki/Model_Context_Protocol) which can act as an interface between natural langauge queries in a ChatBot (such as OpenAI or Claude) and a database (or other resource). 
 
-~~In this workshop we will explore using MCP to “talk” to BHL and ask questions about the what is in the digital library, as well as what it can tell us about specific taxa of interest~~.
+A nice use case for MCP is being able to query knowledge graphs without having to learn a new query language such as SPARQL. By a happy coincidence there is an early version of a knowledge graph for BHL, constructed by Andra Waagmeester (see https://koetai.semscape.org/u/0000-0001-9773-4008/bhl ). If you know SPARQL you can query it directly at https://koetai.semscape.org/u/0000-0001-9773-4008/bhl/sparql (if you have written queries for Wikidata this will look familiar).
+
+As an experiment I have created a MCP server that talks to this BHL knowledge graph. It’s functionality is limited, but when coupled with a state of the art AI chatbot such as Claude or ChatGPT you can “talk” to BHL.
+
+### Add the BHL MCP server to your favourite chatbot
+
+
+
+### Talk to BHL
+
+As an example, here are some questions you might ask. Feel free to modity these, or try other queries.
+
+- Do you have any pages about Belbina pionneaui?
+
+- Do any of those pages have a pictures?
+
+- Show me the text for the treatment of Belbina pionneaui.
+
+- Does BHL have the original description of Belbina pionneaui?
+
 
 ## BHL and knowledge graphs
 
