@@ -24,6 +24,7 @@ SITES=(
   "https://github.com/rdmpage/bhl-name-timeline.git  bhl-name-timeline"
   "https://github.com/rdmpage/bhl-all-the-pages.git  bhl-all-the-pages"
   "https://github.com/rdmpage/bhl-image-search.git   bhl-image-search"
+  "https://github.com/rdmpage/bhl-workshop-rdf-mcp.git bhl-mcp"
 )
 
 if [[ ! -f .env ]]; then

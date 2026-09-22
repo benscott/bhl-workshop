@@ -1,4 +1,4 @@
-# Brings up the whole workshop stack: one Apache+PHP container serving all four
+# Brings up the whole workshop stack: one Apache+PHP container serving all five
 # sites as subdirectories, plus CouchDB. Run on the Hetzner box.
 #
 #   docker compose up -d
@@ -8,6 +8,7 @@
 #   http://HOST/bhl-name-timeline/
 #   http://HOST/bhl-all-the-pages/
 #   http://HOST/bhl-image-search/
+#   http://HOST/bhl-mcp/                 (MCP server, not a browser UI)
 #
 # Put a real TLS reverse proxy (Caddy/Traefik) in front for the workshop URL.
 
