@@ -29,6 +29,19 @@ bhl-workshop.iphylo.org {
 		reverse_proxy couchdb:5984
 	}
 
+	# The MCP server is a directory URL, so Apache answers a request for
+	# /bhl-mcp (no trailing slash) with its own 301 to /bhl-mcp/. Behind this
+	# proxy Apache sees plain HTTP, so that redirect points at http:// -- a
+	# scheme downgrade an MCP client will not follow -- and a 301 would turn the
+	# client's POST into a GET even if it did. Clients paste the URL without the
+	# slash, so this is the difference between "connected" and "can't reach".
+	# Redirect here instead, where the public scheme is known, with 308 to
+	# preserve the method. Verified against the official MCP SDK client: without
+	# this it fails with "Error POSTing to endpoint".
+	handle /bhl-mcp {
+		redir * /bhl-mcp/ 308
+	}
+
 	handle {
 		reverse_proxy web:80
 	}
