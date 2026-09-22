@@ -208,13 +208,20 @@ As an experiment I have created a MCP server that talks to this BHL knowledge gr
 
 ### Add the BHL MCP server to your favourite chatbot
 
+At the moment the MCP server works with Claude. OpenAI seemed to have reserved full MCP server use for business plans.
 
+To add to Claude:
+
+1. Go to **Settings → Connectors** (on claude.ai this is under **Customize**).
+2. Click **+ Add custom connector**.
+3. Paste the URL above, call it `BHL`, and choose **No sign-in**.
+4. Open a new chat — the BHL tools appear in the tool menu.
 
 ### Talk to BHL
 
-As an example, here are some questions you might ask. Feel free to modity these, or try other queries.
+As an example, here are some questions you might ask. Feel free to modify these, or try other queries. 
 
-- Do you have any pages about Belbina pionneaui?
+- Using the BHL RDF connector, do you have any pages about Belbina pionneaui?
 
 - Do any of those pages have a pictures?
 
