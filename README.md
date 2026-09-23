@@ -177,8 +177,8 @@ BioStor comprises the largest source of articles in BHL, and also serves as an e
 
 ![allmaps_image](allmaps_image.png)
 
-1. Go to https://editor.allmaps.org/
-2. Paste in the IIIF manifest for a BHL item. You can get these from https://bhl-workshop.iphylo.org/bhl-light, for example https://bhl-workshop.iphylo.org/bhl-light/item/148293/manifest.json
+1. Go to https://editor.allmaps.org/ (it looks like you will need Chrome of Firefox for this).
+2. Paste in the IIIF manifest for a BHL item. You can get these from https://bhl-workshop.iphylo.org/bhl-light, for example https://bhl-workshop.iphylo.org/bhl-light/item/148293/manifest.json which already has a map in Allmaps, or https://iphylo.org/bhl-light/item/280932/manifest.json which doesn’t.
 3. Pick an image with a map, for example “Image 8”. Double click to load it into the editor.
 4. Use the <img src="polygon.png" height="32"> tool to draw a rectangle or polygon around the map, once you have the polygon you like, double-click, and then click “Finish”. If the shape you have created isn’t what you want, click on the “Map” button on the bottom right to see a list of the polygons you have drawn and delete them.
 5. Click on the <img src="pin.png" height="32"> pin tool to load a view of the map image and a map of the world.
