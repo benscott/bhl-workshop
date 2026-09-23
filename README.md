@@ -2,6 +2,8 @@
 
 <img src="Qq9gaHtO6xZxA54_Untitled 2026-09-16.jpeg">
 
+# https://github.com/rdmpage/bhl-workshop
+
 # 7724 9102
 
 ## Overview
@@ -62,12 +64,7 @@ The same article in five different viewers:
 
 The final viewer displays both the BHL page images, but also OCR text from [Datalab](https://www.datalab.to), and an IIIF viewer. The later is a standard widely used in the museum and archive world to display images. We will meet [IIIF](https://iiif.io) again below.
 
-We have a short menti quiz:
-
-- how important is being able to see BHL on a small screen to you?
-- how important is a custom BHL viewer (versus, say, just providing PDFs?)
-- do you have any suggestions for ways to view BHL content?
-
+- :warning: We have a short menti quiz
 
 ## BHL search
 
@@ -100,6 +97,7 @@ You can ask the tool to fetch synonymns for a taxonomic name from the [Catalogue
 
 ![synynyms](Bison-bison-Linnaeus-1758-synynyms-1024x675.png)
 
+- :warning: We have a short menti quiz
 
 ## BHL image search
 
@@ -154,23 +152,19 @@ Try this for yourself. For instance, search for "maps"
 
 An obvious limitation of this approach is that we are comparing page images rather than individual images. A more sophisticated approach would be to separate images from text and search on just the images. There are increasingly sophisticated tool for doing this, such as those provided by Datalab (see their [playground](https://www.datalab.to/app/playground/documents/new)). Imagine being able to extract all the figures in BHL and make them searchable (see the next topic for further discussion of how feasible this is).
 
-We have a short quiz:
-
-- is image search useful?
-- what could you do with it?
-- how important is it to search by individual images (e.g., figures, not pages)
-
+- :warning: We have a short menti quiz
 
 ## Exercise: BHL knowledge discovery layer (NHM)
 
 Qianqian Hiris Gu and Ben Hartley from The Natural History Museum in London are working on extracting knowledge from BHL text. In this part of the workshop they will give an overview of their work, exploring what  of the latest document understanding tools can tell us about BHL content.
 
+- :warning: We have a short menti quiz
 
 ## BHL and geography
 
-In this part of the workshop we explore geographic interfaces to literature data. There are various interfaces to biodiversity literature, such as [JournalMap](https://www.journalmap.org) and [BioStor](https://biostor.org/map). While many will be familiar with point-based geographic data, other approaches are available such as grids (e.g., [H3](https://h3geo.org)). The defunct [Frankenplace](http://www.frankenplace.com/) project took a novel approach which mapped text terms to a geographic grid so your search would highlight regions of the world that matched that term (see [Frankenplace, geospatial search, and discrete global grid systems](https://iphylo.blogspot.com/2019/05/frankenplace-geospatial-search-and.html)).
+In this part of the workshop we explore geographic interfaces to literature data. There are various interfaces to biodiversity literature, such as [JournalMap](https://www.journalmap.org) and [BioStor](https://biostor.org/map). While many will be familiar with point-based geographic data, other approaches are available such as grids (e.g., [H3](https://h3geo.org), see also [Uber H3 viewer](https://clupasq.github.io/h3-viewer/). The defunct [Frankenplace](http://www.frankenplace.com/) project took a novel approach which mapped text terms to a geographic grid so your search would highlight regions of the world that matched that term (see [Frankenplace, geospatial search, and discrete global grid systems](https://iphylo.blogspot.com/2019/05/frankenplace-geospatial-search-and.html)).
 
-### Exercise: BioStor map
+### Demo: BioStor map
 
 BioStor comprises the largest source of articles in BHL, and also serves as an experimental platform for displaying BHL content. For example, for each article BioStor finds in BHL it looks for latitude and longitude pairs in the text and puts those on a [map](https://biostor.org/map). You can browse the map, select regions, and see what papers mention those localities. You can also upload GeoJSON (e.g., for an island) and discover what papers include that region in their content.
 
@@ -193,10 +187,7 @@ BioStor comprises the largest source of articles in BHL, and also serves as an e
 8. You can adjust the opacity of both the background map and the BHL image.
 ![allmaps_opacity](allmaps_opacity.png)
 
-We have a short quiz:
-
-- what map-based interface works best for you?
-- are there any map interfaces you've seen that we've missed?
+- :warning: We have a short menti quiz
 
 ## BHL, AI, and knowledge graphs
 
@@ -214,7 +205,7 @@ To add to Claude:
 
 1. Go to **Settings → Connectors** (on claude.ai this is under **Customize**).
 2. Click **+ Add custom connector**.
-3. Paste the URL above, call it `BHL`, and choose **No sign-in**.
+3. Paste the URL **https://bhl-workshop.iphylo.org/bhl-mcp/**, call it `BHL`, and choose **No sign-in**.
 4. Open a new chat — the BHL tools appear in the tool menu.
 
 ### Talk to BHL
@@ -229,26 +220,13 @@ As an example, here are some questions you might ask. Feel free to modify these,
 
 - Does BHL have the original description of Belbina pionneaui?
 
-
-## BHL and knowledge graphs
-
-This section is left as an exercise for the reader (!). There is a lot of BHL-related content on [Wikidata](https://www.wikidata.org), and interesting developments around GBIF, OpenStreetMap, and RDF. 
-
-### Demo: Knowledge graph for BHL
-
-Andra Waagmeester has created a version of BHL in RDF. When combined with a version of GBIF hosted at the University of Freiberg, see https://ui.qlever.dev/gbif.
-
-The experimental RDF version of BHL is at https://koetai.semscape.org/u/0000-0001-9773-4008/bhl
-
+- :warning: We have a short menti quiz
 
 ## Summary
 
-At the end of the workshop we have another Menti quiz:
+That concludes the workshop.
 
-- what feature we investigated would you most like to see in a future BHL?
-- was the workshop useful?
-- should BHL have a challenge like GBIF has?
-
+- :warning: We have a short menti quiz
 
 ## References
 
