@@ -2,30 +2,28 @@
 
 <img src="Qq9gaHtO6xZxA54_Untitled 2026-09-16.jpeg">
 
+# https://github.com/rdmpage/bhl-workshop
+
+# 7724 9102
+
 ## Overview
 
 This is a workshop on the [Biodiversity Heritage Library](https://www.biodiversitylibrary.org) (BHL), a large, open access collection  of literature on biodiversity.
 
-The goal is to explore some approaches to discovering content in the more than 64 million pages BHL provides. Most of these approaches are exploratory, "proof of concept" tools, and we make no claim that these tools are fit for purpose, or indeed are the only ways we could explore BHL. Indeed, if you have ideas for ways to get more out of BHL pleasse share them.
+The goal is to explore some approaches to discovering content in the more than 64 million pages BHL provides. Most of these approaches are exploratory, "proof of concept" tools, and I make no claim that these tools are fit for purpose, or are the only ways we could explore BHL. Indeed, if you have ideas for ways to get more out of BHL please feel free to share them.
 
 While the workshop is an in-person event, the activities are all online, so if you are not able to attended you should still be able to get something from this event.
 
-The workshop starts with an opportunity to quickly introduce yourself, followed by a similarly short introduction to BHL. Then we explore a range of topics.
+The workshop starts with an opportunity to quickly introduce yourself, followed by a similarly short introduction to BHL. Then we will explore a range of topics.
 
 
 ## Introduction
 
-To help get a sense of your interests, and your experience (if any) with BHL, we have a short Menti quiz where you can tell us a little about yourself (anonymously). There are three questions:
-
-- what is your background? (taxonomist, developer, data scientist, )
-- how often do you use BHL? (daily, weekly, monthly, infrequently, never)
-- what do you like most about BHL?
-
+To help get a sense of your interests, and your experience (if any) with BHL, we have a short Menti quiz where you can tell us a little about yourself (the quiz is anonymous). You can join the quiz using the link https://www.menti.com/0bc0bf or go to https://www.menti.com and enter the code 7724 9102.
 
 ## BHL overview
 
 The website [BHL on a Hilbert curve](https://bhl-workshop.iphylo.org/bhl-all-the-pages/) is an attempt to show a small fraction of BHL on a single web page, just to give a sense of the diversity of content in BHL, and one of the primary challenges, which is finding stuff.
-
 
 If you are taking part in this workshop it is likely that you have some experience with BHL, never the less it is probably worth listing some of the ways to access BHL.
 
@@ -36,40 +34,37 @@ If you are taking part in this workshop it is likely that you have some experien
 - there are [data downloads and a well documented API](https://about.biodiversitylibrary.org/tools-and-services/developer-and-data-tools/)
 - you can access images and OCR text directly via [Amazon Web Services](https://registry.opendata.aws/bhl-open-data/)
 - many of the colour plates (the "pretty") from BHL are also on [Flickr](https://www.flickr.com/photos/biodivlibrary/with/53903344408)
-- there is a [public discussion forum](https://forum.biodiversitylibrary.org)
+- there is a [discussion forum](https://forum.biodiversitylibrary.org)
 
 
 ### BHL helpers
 
-There are projects that assist BHL in adding value to its content, such as Global Names (taxonomic name indexing) and BioStor (article finding).
+There are projects that assist BHL in adding value to its content, such as [Global Names](https://globalnames.org) (taxonomic name indexing) and [BioStor](https://biostor.org) (article finding).
 
-[BioStor](https://biostor.org) has a simple search interface, as well as ways to view articles arranged by journal, and also on a map. we will explore the map feature in more detail below.
+[BioStor](https://biostor.org) has a simple search interface, as well as ways to view articles arranged by journal, and also on a map. We will explore the map feature in more detail below.
 
 
-## Viewing content
+## Exercise: Viewing content
 
-The first topic is probably the most obvious, which is how to display articles on BHL? The current site uses a "book viewer" based on code from the Internet Archive. Let's look at some of the alternatives.
+The first topic is probably the most obvious: how to display articles on BHL? The current site uses a "book viewer" based on code from the Internet Archive. Let's look at some of the alternatives.
 
-The same article in four different viewers:
+The same article in five different viewers:
 
 - [Current BHL viewer](https://www.biodiversitylibrary.org/item/244617)
 - [EJT PDF viewer](https://europeanjournaloftaxonomy.eu/index.php/ejt/article/view/76/25)
 - [BHL Light viewer](https://bhl-workshop.iphylo.org/bhl-light/item/244617)
+- [IIIF viewer with Plazi annotations](https://ejt.biodiversity.hasdai.org/records/fyh4q-xg421)
 - [Experimental responsive viewer](https://rdmpage.github.io/responsive-viewer/) (code on [GitHub](https://github.com/rdmpage/responsive-viewer))
 
 ![bhlviewer](bhlviewer.png)
 ![pdf](pdf.png)
+![hasdai](hasdai.png)
 ![bhl-light](bhl-light.png)
 ![responsive](responsive.png)
 
-The final viewer displays both the BHL page images, but also OCR text from [Datalab](https://www.datalab.to), and an IIIF viewer. The later is a standard widely used in the museum and archive world to display images. We will meet IIIF again below.
+The final viewer displays both the BHL page images, but also OCR text from [Datalab](https://www.datalab.to), and an IIIF viewer. The later is a standard widely used in the museum and archive world to display images. We will meet [IIIF](https://iiif.io) again below.
 
-We have a short quiz:
-
-- how important is being able to see BHL on a small screen to you?
-- how important is a custom BHL viewer (versus, say, just providing PDFs?)
-- do you have any suggestions for ways to view BHL content?
-
+- :warning: We have a short menti quiz
 
 ## BHL search
 
@@ -90,7 +85,7 @@ Can you figure out what is going on?
 
 Arguably BHL’s “killer feature” is taxonomic name indexing, provided by [Global Names](https://globalnames.org). Each page in BHL has been searched for strings that look like taxonomic names, and these have been indexed so that you can search by taxonomic name. Sometimes it finds strings that aren’t taxonomic names (or, might be taxonomic names, but in most cases aren’t). For example [Scutellum](https://www.biodiversitylibrary.org/name/Scutellum) or [Argentina](https://www.biodiversitylibrary.org/name/Argentina).
 
-### Taxonomic timelines
+### Exercise: Taxonomic timelines
 
 Viewing changes in word usage overtime was popularised by the [Google Books Ngram Viewer](https://books.google.com/ngrams/) tool. Ryan Schenk's synynyms tool (now offline, see [Taxonomic name timelines for BHL](https://iphylo.blogspot.com/2016/12/taxonomic-name-timelines-for-bhl.html), Ryan’s code is in [GitHub](https://github.com/rschenk/synynyms)) was an early example of a similar approach to taxonomic names. 
 
@@ -102,12 +97,13 @@ You can ask the tool to fetch synonymns for a taxonomic name from the [Catalogue
 
 ![synynyms](Bison-bison-Linnaeus-1758-synynyms-1024x675.png)
 
+- :warning: We have a short menti quiz
 
 ## BHL image search
 
 BHL has 64 million images of pages. So far we have concentrated on exploring BHL using text, but what about images? In this section we will look at two tools for image classification and search.
 
-### Image classification
+### Demo: Image classification
 
 Mike Trizna created a [Hugging Face space](https://huggingface.co/spaces/MikeTrizna/bhl_clip_classifier) that uses OpenAI's [CLIP](https://huggingface.co/openai/clip-vit-base-patch32) model to classify BHL pages. You supply an image (there are examples you can chose from) and a list of possible categories, for example:
 - A page of printed text; 
@@ -123,8 +119,16 @@ and the tool will return the probability that the image belongs in each of those
 
 Tools like this image classifier could help BHL automate the tags it assigns to pages, perhaps enabling users to search for categories of pages (e.g., "show me pages that display maps").
 
+#### Exercise: IIIF Illustration Detector 
 
-### Image search
+The [IIIF Illustration Detector](https://huggingface.co/spaces/small-models-for-glam/iiif-illustration-detector) is a cool demonstration of using a [small LLM that runs in your browser](https://huggingface.co/small-models-for-glam/historical-illustration-detector) to decided whether a page has an illustration or not. It needs a IIIF manifest for the item whose pages you want to classify, you can get manifests from BHL-Light, e.g. https://bhl-workshop.iphylo.org/bhl-light/item/244617/manifest.json
+
+Paste in a manifest, click “Load Manifest” then “Classify” and it works through each page as you watch.
+
+![iiifdetector](iiifdetector.png)
+
+
+### Exercise: Image search
 
 The image classifier Mike Trizna put together inspired the next tool we will look at, [BHL image search](https://bhl-workshop.iphylo.org/bhl-image-search/), code on [GitHub](https://github.com/rdmpage/bhl-all-the-images). This tool takes a small subset of BHL page images and uses the CLIP model to convert each model to an [embedding](https://en.wikipedia.org/wiki/Embedding_(machine_learning)), that is a vector or list of numbers that represent that image. Images that are similar in some sense will typically have similar vectors, which makes images searchable. 
 
@@ -142,14 +146,13 @@ The CLIP model enables you to search for images based on text, foe example, here
 
 ![imagesearch](imagesearch.png)
 
-
 Try this for yourself. For instance, search for "maps"
-
 
 #### Beyond page images
 
 An obvious limitation of this approach is that we are comparing page images rather than individual images. A more sophisticated approach would be to separate images from text and search on just the images. There are increasingly sophisticated tool for doing this, such as those provided by Datalab (see their [playground](https://www.datalab.to/app/playground/documents/new)). Imagine being able to extract all the figures in BHL and make them searchable (see the next topic for further discussion of how feasible this is).
 
+- :warning: We have a short menti quiz
 
 We have a short quiz:
 
@@ -192,29 +195,31 @@ We will give an overview of these plans and invite suggestions from participants
 - What information would you most like to find more easily in BHL?
 - Which features would be most useful for finding and exploring information in BHL?
 - What would most help you judge whether information extracted automatically from BHL is reliable?
+## Exercise: BHL knowledge discovery layer (NHM)
 
 Your suggestions will help us refine the interface and prioritise the information it makes available.
 
+- :warning: We have a short menti quiz
 
 ## BHL and geography
 
-In this part of the workshop we explore geographic interfaces to literature data. There are various interfaces to biodiversity literature, such as [JournalMap](https://www.journalmap.org) and [BioStor](https://biostor.org/map). While many will be familiar with point-based geographic data, other approaches are available such as grids (e.g., [H3](https://h3geo.org)). The defunct [Frankenplace](http://www.frankenplace.com/) project took a novel approach which mapped text terms to a geographic grid so your search would highlight regions of the world that matched that term (see [Frankenplace, geospatial search, and discrete global grid systems](https://iphylo.blogspot.com/2019/05/frankenplace-geospatial-search-and.html)).
+In this part of the workshop we explore geographic interfaces to literature data. There are various interfaces to biodiversity literature, such as [JournalMap](https://www.journalmap.org) and [BioStor](https://biostor.org/map). While many will be familiar with point-based geographic data, other approaches are available such as grids (e.g., [H3](https://h3geo.org), see also [Uber H3 viewer](https://clupasq.github.io/h3-viewer/). The defunct [Frankenplace](http://www.frankenplace.com/) project took a novel approach which mapped text terms to a geographic grid so your search would highlight regions of the world that matched that term (see [Frankenplace, geospatial search, and discrete global grid systems](https://iphylo.blogspot.com/2019/05/frankenplace-geospatial-search-and.html)).
 
-### BioStor map
+### Demo: BioStor map
 
 BioStor comprises the largest source of articles in BHL, and also serves as an experimental platform for displaying BHL content. For example, for each article BioStor finds in BHL it looks for latitude and longitude pairs in the text and puts those on a [map](https://biostor.org/map). You can browse the map, select regions, and see what papers mention those localities. You can also upload GeoJSON (e.g., for an island) and discover what papers include that region in their content.
 
-![zeroshot](biostormap.png)
+![biostormap](biostormap.png)
 
 
-### Putting maps on the map (Allmaps)
+### Exercise: Putting maps on the map (Allmaps)
 
 [Allmaps](https://allmaps.org) is a fascinating project where people can add an image of a map to a modern map. The software will handle things such as align the map to latitude and longitude points, and rotate and stretch the map image as required. In order to work Allmaps needs the map image to be available in the [IIIF](https://iiif.io) format.
 
 ![allmaps_image](allmaps_image.png)
 
-1. Go to https://editor.allmaps.org/
-2. Paste in the IIIF manifest for a BHL item. You can get these from https://bhl-workshop.iphylo.org/bhl-light, for example https://bhl-workshop.iphylo.org/bhl-light/item/148293/manifest.json
+1. Go to https://editor.allmaps.org/ (it looks like you will need Chrome of Firefox for this).
+2. Paste in the IIIF manifest for a BHL item. You can get these from https://bhl-workshop.iphylo.org/bhl-light, for example https://bhl-workshop.iphylo.org/bhl-light/item/148293/manifest.json which already has a map in Allmaps, or https://iphylo.org/bhl-light/item/280932/manifest.json which doesn’t.
 3. Pick an image with a map, for example “Image 8”. Double click to load it into the editor.
 4. Use the <img src="polygon.png" height="32"> tool to draw a rectangle or polygon around the map, once you have the polygon you like, double-click, and then click “Finish”. If the shape you have created isn’t what you want, click on the “Map” button on the bottom right to see a list of the polygons you have drawn and delete them.
 5. Click on the <img src="pin.png" height="32"> pin tool to load a view of the map image and a map of the world.
@@ -223,31 +228,46 @@ BioStor comprises the largest source of articles in BHL, and also serves as an e
 8. You can adjust the opacity of both the background map and the BHL image.
 ![allmaps_opacity](allmaps_opacity.png)
 
+- :warning: We have a short menti quiz
 
-We have a short quiz:
-
-- what map-based interface works best for you?
-- are there any map interfaces you've seen that we've missed?
-
-## BHL and AI
+## BHL, AI, and knowledge graphs
 
 In amongst all the buzz and noise about AI, one of the most interesting outcomes is the [Model Context Protocol](https://en.wikipedia.org/wiki/Model_Context_Protocol) which can act as an interface between natural langauge queries in a ChatBot (such as OpenAI or Claude) and a database (or other resource). 
 
-In this workshop we will explore using MCP to “talk” to BHL and ask questions about the what is in the digital library, as well as what it can tell us about specific taxa of interest.
+A nice use case for MCP is being able to query knowledge graphs without having to learn a new query language such as SPARQL. By a happy coincidence there is an early version of a knowledge graph for BHL, constructed by Andra Waagmeester (see https://koetai.semscape.org/u/0000-0001-9773-4008/bhl ). If you know SPARQL you can query it directly at https://koetai.semscape.org/u/0000-0001-9773-4008/bhl/sparql (if you have written queries for Wikidata this will look familiar).
 
-## BHL and knowledge graphs
+As an experiment I have created a MCP server that talks to this BHL knowledge graph. It’s functionality is limited, but when coupled with a state of the art AI chatbot such as Claude or ChatGPT you can “talk” to BHL.
 
-This section is left as an exercise for the reader (!). There is a lot of BHL-related content on Wikidata, and interesting developments around GBIF, OpenStreetMap, and RDF. 
+### Add the BHL MCP server to your favourite chatbot
 
+At the moment the MCP server works with Claude. OpenAI seemed to have reserved full MCP server use for business plans.
+
+To add to Claude:
+
+1. Go to **Settings → Connectors** (on claude.ai this is under **Customize**).
+2. Click **+ Add custom connector**.
+3. Paste the URL **https://bhl-workshop.iphylo.org/bhl-mcp/**, call it `BHL`, and choose **No sign-in**.
+4. Open a new chat — the BHL tools appear in the tool menu.
+
+### Talk to BHL
+
+As an example, here are some questions you might ask. Feel free to modify these, or try other queries. 
+
+- Using the BHL RDF connector, do you have any pages about Belbina pionneaui?
+
+- Do any of those pages have a pictures?
+
+- Show me the text for the treatment of Belbina pionneaui.
+
+- Does BHL have the original description of Belbina pionneaui?
+
+- :warning: We have a short menti quiz
 
 ## Summary
 
-At the end of the workshop we have another Menti quiz:
+That concludes the workshop.
 
-- what feature we investigated would you most like to see in a future BHL?
-- was the workshop useful?
-- should BHL have a challenge like GBIF has?
-
+- :warning: We have a short menti quiz
 
 ## References
 

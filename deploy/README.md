@@ -1,6 +1,6 @@
 # deploy — running the workshop sites on Hetzner
 
-Ops code for serving the four `bhl-*` demo sites from a cloud box (Hetzner) as
+Ops code for serving the five `bhl-*` demo sites from a cloud box (Hetzner) as
 the **primary** workshop server, with the Mac mini in Glasgow as dev / backup.
 
 The workshop content (the top-level `README.md` of this repo) links to these
@@ -15,12 +15,13 @@ GitHub repo and is cloned in by `bootstrap.sh`:
 | `bhl-image-search`  | `rdmpage/bhl-image-search` | none (calls the search API) |
 | `bhl-light`         | `rdmpage/bhl-light` | CouchDB `bhl-lite` (~6 GB) + images (already on Hetzner) |
 | `bhl-name-timeline` | `rdmpage/bhl-name-timeline` | `bhl.db` SQLite (~14 GB) |
+| `bhl-mcp`           | `rdmpage/bhl-workshop-rdf-mcp` | none (wraps a remote SPARQL endpoint) |
 
 ## Layout
 
 ```
 deploy/
-├── docker-compose.yml   # Apache+PHP (serves all four sites) + CouchDB
+├── docker-compose.yml   # Apache+PHP (serves all five sites) + CouchDB
 ├── .env.template        # copy to .env on the server, fill in secrets
 ├── bootstrap.sh         # run ON HETZNER: clone repos into ./sites, bring stack up
 ├── sync-to-cloud.sh     # run ON THE MINI: push bhl.db + CouchDB to Hetzner
